@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name Player
 
-var MAX_SPEED = 220
+var MAX_SPEED = 200
 var ACCELERATION = 2200
 
 @onready var animation_player = $AnimationPlayer

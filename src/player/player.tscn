@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dtemov8oddfs"]
+[gd_scene load_steps=21 format=3 uid="uid://dtemov8oddfs"]
 
 [ext_resource type="Script" path="res://src/player/Player.gd" id="1_88xxv"]
 [ext_resource type="Texture2D" uid="uid://dy1j3jfhnyx04" path="res://assets/player.png" id="1_t63ym"]
@@ -124,6 +124,20 @@ _data = {
 "Walled": SubResource("Animation_wfdvp")
 }
 
+[sub_resource type="Curve" id="Curve_8pxgt"]
+_data = [Vector2(0.0056872, 0.802529), 0.0, 0.0, 0, 0, Vector2(0.252133, 0.800461), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_rp7d2"]
+min_value = -1.0
+max_value = 0.0
+_data = [Vector2(0, -1), 0.0, 0.0, 0, 0, Vector2(0.505213, -1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_6p0vx"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.747867, 0.495467), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_88xxv")
 
@@ -160,9 +174,11 @@ script = ExtResource("3_eyxhj")
 
 [node name="Fall" type="Node" parent="StateMachine"]
 script = ExtResource("7_lbbdt")
+y_curve = SubResource("Curve_8pxgt")
 
 [node name="Jump" type="Node" parent="StateMachine"]
 script = ExtResource("6_06vee")
+y_curve = SubResource("Curve_rp7d2")
 
 [node name="JumpTimer" type="Timer" parent="StateMachine/Jump"]
 wait_time = 0.35
@@ -170,5 +186,6 @@ one_shot = true
 
 [node name="Walled" type="Node" parent="StateMachine"]
 script = ExtResource("8_si0im")
+y_curve = SubResource("Curve_6p0vx")
 
 [connection signal="timeout" from="StateMachine/Jump/JumpTimer" to="StateMachine/Jump" method="_on_jump_timer_timeout"]
