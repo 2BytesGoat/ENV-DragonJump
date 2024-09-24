@@ -1,8 +1,12 @@
 extends State
+class_name PlayerIdle
 
 
 func enter(_msg := {}) -> void:
+	owner.x_strength = 0
+	owner.y_strength = 0
 	owner.play_animation(self.name)
+	
 	if not owner.is_on_floor():
 		state_machine.transition_to("Fall")
 	elif owner.started_walking:

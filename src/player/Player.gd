@@ -1,26 +1,32 @@
 extends CharacterBody2D
+class_name Player
 
 var MAX_SPEED = 220
-var ACCELERATION = 1800
+var ACCELERATION = 2200
 
 @onready var animation_player = $AnimationPlayer
 @onready var sprite = $Sprite2D
 
+var modifiers = {}
+
 var started_walking = false
-var facing_direction = 1
-var input_x = 0
-var input_y = 0
+
+var facing_direction = 1 # 1 is RIGHT -1 is LEFT
+var x_strength = 0
+var y_strength = 0
 
 
 func _physics_process(delta: float) -> void:
-	var target_speed = Vector2(input_x, input_y) * MAX_SPEED
+	var target_speed = Vector2(x_strength * facing_direction, y_strength) * MAX_SPEED
 	velocity = velocity.move_toward(target_speed, ACCELERATION * delta)
+	
+	for mod in modifiers.values():
+		velocity *= mod["velocity"]
+	
 	move_and_slide()
-	update_facing_direction()
+	update_sprite_facing_direction()
 
-func update_facing_direction() -> void:
-	if input_x != 0:
-		facing_direction = sign(input_x)
+func update_sprite_facing_direction() -> void:
 	sprite.scale.x = facing_direction
 
 func play_animation(animation_name: String) -> void:

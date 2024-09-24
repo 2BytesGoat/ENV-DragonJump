@@ -158,15 +158,15 @@ script = ExtResource("3_7vw8c")
 [node name="Run" type="Node" parent="StateMachine"]
 script = ExtResource("3_eyxhj")
 
+[node name="Fall" type="Node" parent="StateMachine"]
+script = ExtResource("7_lbbdt")
+
 [node name="Jump" type="Node" parent="StateMachine"]
 script = ExtResource("6_06vee")
 
 [node name="JumpTimer" type="Timer" parent="StateMachine/Jump"]
-wait_time = 0.32
+wait_time = 0.35
 one_shot = true
-
-[node name="Fall" type="Node" parent="StateMachine"]
-script = ExtResource("7_lbbdt")
 
 [node name="Walled" type="Node" parent="StateMachine"]
 script = ExtResource("8_si0im")

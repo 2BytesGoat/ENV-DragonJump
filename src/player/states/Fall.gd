@@ -1,8 +1,10 @@
 extends State
+class_name PlayerFall
 
 
 func enter(_msg := {}) -> void:
-	owner.input_y = 0.85
+	# TODO: Replace this with curve
+	owner.y_strength = 1
 	owner.play_animation(self.name)
 
 func physics_update(delta: float) -> void:
