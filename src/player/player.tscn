@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dtemov8oddfs"]
+[gd_scene load_steps=22 format=3 uid="uid://dtemov8oddfs"]
 
 [ext_resource type="Script" path="res://src/player/Player.gd" id="1_88xxv"]
 [ext_resource type="Texture2D" uid="uid://dy1j3jfhnyx04" path="res://assets/player.png" id="1_t63ym"]
@@ -124,15 +124,19 @@ _data = {
 "Walled": SubResource("Animation_wfdvp")
 }
 
+[sub_resource type="Curve" id="Curve_2tw8m"]
+_data = [Vector2(0, 0.803563), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [sub_resource type="Curve" id="Curve_8pxgt"]
-_data = [Vector2(0.0056872, 0.802529), 0.0, 0.0, 0, 0, Vector2(0.252133, 0.800461), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 3
+_data = [Vector2(0, 0.747733), 0.0, 0.0, 0, 0, Vector2(0.598104, 1), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="Curve" id="Curve_rp7d2"]
-min_value = -1.0
+min_value = -1.5
 max_value = 0.0
-_data = [Vector2(0, -1), 0.0, 0.0, 0, 0, Vector2(0.505213, -1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
+_data = [Vector2(0, -1.5), 0.0, 0.0, 0, 0, Vector2(0.0805687, -1.00338), 0.0, 0.0, 0, 0, Vector2(0.746919, -1.00493), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
 
 [sub_resource type="Curve" id="Curve_6p0vx"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.747867, 0.495467), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -160,7 +164,7 @@ shape = SubResource("RectangleShape2D_00el7")
 libraries = {
 "": SubResource("AnimationLibrary_mvj3a")
 }
-speed_scale = 1.25
+speed_scale = 1.42
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("2_l5bkl")
@@ -171,6 +175,7 @@ script = ExtResource("3_7vw8c")
 
 [node name="Run" type="Node" parent="StateMachine"]
 script = ExtResource("3_eyxhj")
+x_curve = SubResource("Curve_2tw8m")
 
 [node name="Fall" type="Node" parent="StateMachine"]
 script = ExtResource("7_lbbdt")
@@ -181,7 +186,7 @@ script = ExtResource("6_06vee")
 y_curve = SubResource("Curve_rp7d2")
 
 [node name="JumpTimer" type="Timer" parent="StateMachine/Jump"]
-wait_time = 0.35
+wait_time = 0.3
 one_shot = true
 
 [node name="Walled" type="Node" parent="StateMachine"]

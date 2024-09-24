@@ -4,6 +4,7 @@ class_name PlayerFall
 @export var y_curve: Curve
 var time = 0.0
 
+
 func enter(_msg := {}) -> void:
 	time = 0.0
 	owner.y_strength = y_curve.sample(time)

@@ -6,11 +6,11 @@ var time = 0.0
 
 
 func enter(_msg := {}) -> void:
-	# TODO: Replace this with curve
 	time = 0.0
 	owner.facing_direction *= -1
 	owner.y_strength = y_curve.sample(time)
-	owner.modifiers["walled"] = {"velocity": Vector2(-0.1, 1)}
+	# TODO: find a better way to add modifiers
+	owner.modifiers["walled"] = {"velocity": Vector2(-0.01, 1)}
 	owner.play_animation(self.name)
 
 func handle_input(event: InputEvent) -> void:

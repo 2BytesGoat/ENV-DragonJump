@@ -1,14 +1,13 @@
 extends CharacterBody2D
 class_name Player
 
-var MAX_SPEED = 200
+var MAX_SPEED = Vector2(220, 200)
 var ACCELERATION = 2200
 
 @onready var animation_player = $AnimationPlayer
 @onready var sprite = $Sprite2D
 
 var modifiers = {}
-
 var started_walking = false
 
 var facing_direction = 1 # 1 is RIGHT -1 is LEFT

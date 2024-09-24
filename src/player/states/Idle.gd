@@ -5,6 +5,7 @@ class_name PlayerIdle
 func enter(_msg := {}) -> void:
 	owner.x_strength = 0
 	owner.y_strength = 0
+	owner.velocity.x *= 0.5
 	owner.play_animation(self.name)
 	
 	if not owner.is_on_floor():
