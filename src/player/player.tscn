@@ -125,11 +125,11 @@ _data = {
 }
 
 [sub_resource type="Curve" id="Curve_2tw8m"]
-_data = [Vector2(0, 0.803563), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.666841), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_8pxgt"]
-_data = [Vector2(0, 0.747733), 0.0, 0.0, 0, 0, Vector2(0.598104, 1), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.598104, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_rp7d2"]
@@ -164,7 +164,7 @@ shape = SubResource("RectangleShape2D_00el7")
 libraries = {
 "": SubResource("AnimationLibrary_mvj3a")
 }
-speed_scale = 1.42
+speed_scale = 1.6
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("2_l5bkl")
@@ -186,7 +186,7 @@ script = ExtResource("6_06vee")
 y_curve = SubResource("Curve_rp7d2")
 
 [node name="JumpTimer" type="Timer" parent="StateMachine/Jump"]
-wait_time = 0.3
+wait_time = 0.4
 one_shot = true
 
 [node name="Walled" type="Node" parent="StateMachine"]

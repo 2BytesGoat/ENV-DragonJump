@@ -1,8 +1,8 @@
 extends CharacterBody2D
 class_name Player
 
-var MAX_SPEED = Vector2(220, 200)
-var ACCELERATION = 2200
+var MAX_SPEED = Vector2(180, 200)
+var ACCELERATION = 2000
 
 @onready var animation_player = $AnimationPlayer
 @onready var sprite = $Sprite2D

@@ -20,5 +20,5 @@ func physics_update(delta: float) -> void:
 	if not owner.is_on_floor():
 		state_machine.transition_to("Fall")
 	elif owner.is_on_wall():
-		time = 0
+		time = 0.0
 		owner.facing_direction *= -1
