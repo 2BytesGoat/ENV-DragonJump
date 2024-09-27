@@ -7,11 +7,14 @@ var time = 0.0
 
 func enter(_msg := {}) -> void:
 	time = 0.0
-	owner.facing_direction *= -1
+	var walled_direction = get_walled_direction()
+	if walled_direction != Vector2.ZERO:
+		owner.facing_direction = walled_direction.x
 	owner.y_strength = y_curve.sample(time)
 	# TODO: find a better way to add modifiers
 	owner.modifiers["walled"] = {"velocity": Vector2(-0.01, 1)}
 	owner.play_animation(self.name)
+	
 
 func handle_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):
@@ -30,3 +33,11 @@ func physics_update(delta: float) -> void:
 func exit() -> void:
 	owner.x_strength = 0
 	owner.modifiers.erase("walled")
+
+func get_walled_direction():
+	var collision = owner.get_last_slide_collision()
+	if collision:
+		var normal = collision.get_normal()
+		if abs(normal.x) > abs(normal.y):  # Check if the collision is mostly horizontal
+			return normal
+	return Vector2.ZERO

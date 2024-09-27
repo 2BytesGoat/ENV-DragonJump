@@ -6,7 +6,7 @@ var time = 0.0
 
 
 func enter(_msg := {}) -> void:
-	time = 0.0
+	time = 0.5
 	owner.x_strength = x_curve.sample(time)
 	owner.play_animation(self.name)
 

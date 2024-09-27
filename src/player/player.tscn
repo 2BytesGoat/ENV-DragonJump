@@ -186,11 +186,17 @@ script = ExtResource("6_06vee")
 y_curve = SubResource("Curve_rp7d2")
 
 [node name="JumpTimer" type="Timer" parent="StateMachine/Jump"]
-wait_time = 0.4
+wait_time = 0.36
 one_shot = true
 
 [node name="Walled" type="Node" parent="StateMachine"]
 script = ExtResource("8_si0im")
 y_curve = SubResource("Curve_6p0vx")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
 
 [connection signal="timeout" from="StateMachine/Jump/JumpTimer" to="StateMachine/Jump" method="_on_jump_timer_timeout"]
