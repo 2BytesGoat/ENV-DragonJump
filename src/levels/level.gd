@@ -1,12 +1,41 @@
 extends Node2D
 
 @onready var bg_layer = $BackgroundLayer
+@onready var scene_layer = $ScenesLayer
 
-var map_code = "W40/W1E38W1/W1E38W1/W1E38W1/W1E38W1/W1E38W1/W1E38W1/W1E38W1/W13E26W1/W1E38W1/W1E18W9E11W1/W1E38W1/W1E38W1/W1E38W1/W1E32W7/W1E32W1E6/W1E21W7E4W1E6/W1E32W1E6/W1E11W6E15W1E6/W13E4W1E15W1E6/E17W17E6"
+const symbol_to_cell_info = {
+	"W": {
+		"type": "background",
+		"source": 0,
+		"coords": Vector2i(3, 3)
+	},
+	"P": {
+		"type": "scene",
+		"source": 0,
+		"coords": Vector2i(0, 0)
+	},
+	"Q": {
+		"type": "scene",
+		"source": 0,
+		"coords": Vector2i(1, 1)
+	}
+}
+
+const symbol_to_scene = {
+	"P": preload("res://src/player/player.tscn"),
+	"Q": preload("res://src/scenes/exit.tscn")
+}
+
+var map_code = "W40/W1E38W1/W1E38W1/W1E38W1/W1E38W1/W1E38W1/W1E38W1/W1E38W1/W13E26W1/W1E38W1/W1E18W9E11W1/W1E38W1/W1E38W1/W1E38W1/W1E32W7/W1E32W1E6/W1E2P1E18W7E4W1E6/W1E32W1E6/W1E11W6E15W1E6/W13E4W1E15W1E6/E17W17E6"
 var offset = Vector2i(0, -10)
+var tilemap_scene_locations = {}
+
 
 func _ready():
+	#print(get_map_code())
+	map_code = get_map_code()
 	set_map_code()
+	load_scenes()
 
 func get_map_code():
 	var map_sub_codes = []
@@ -18,10 +47,13 @@ func get_map_code():
 		var current_symbol = "E"
 		var current_symbol_cnt = 0
 		for x in range(map_size.x):
-			var tile_data = bg_layer.get_cell_tile_data(Vector2i(x, y) + map_offset)
 			var tile_symbol = "E"
-			if tile_data != null:
+			var bg_tile_data = bg_layer.get_cell_tile_data(Vector2i(x, y) + map_offset)
+			if bg_tile_data != null:
 				tile_symbol = "W"
+			var scene_tile_data = scene_layer.get_cell_tile_data(Vector2i(x, y) + map_offset)
+			if scene_tile_data != null:
+				tile_symbol = scene_tile_data.get_custom_data("Symbol")
 			if tile_symbol == current_symbol:
 				current_symbol_cnt += 1
 			else:
@@ -57,5 +89,26 @@ func set_map_code():
 func set_multiple_map_cells(symbol, symbol_cnt, offset):
 	if symbol == "E":
 		return
+	
+	var cell_info = symbol_to_cell_info[symbol]
+	var tilemap_layer = bg_layer
+	if cell_info["type"] == "scene":
+		tilemap_layer = scene_layer
+		if symbol not in tilemap_scene_locations:
+			tilemap_scene_locations[symbol] = []
+	
 	for i in range(symbol_cnt):
-		bg_layer.set_cell(offset + Vector2i(i, 0), 0, Vector2i(3, 3))
+		tilemap_layer.set_cell(offset + Vector2i(i, 0), cell_info["source"], cell_info["coords"])
+		if cell_info["type"] == "scene":
+			tilemap_scene_locations[symbol].append(offset + Vector2i(i, 0))
+	
+func load_scenes():
+	for symbol in tilemap_scene_locations:
+		var scene_locations = tilemap_scene_locations[symbol]
+		for location in scene_locations:
+			scene_layer.erase_cell(location)
+			var obj_scene = symbol_to_scene[symbol]
+			var obj_position = scene_layer.to_global(scene_layer.map_to_local(location))
+			var obj = obj_scene.instantiate()
+			add_child(obj)
+			obj.global_position = obj_position
