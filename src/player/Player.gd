@@ -6,6 +6,7 @@ var ACCELERATION = 2000
 
 @onready var animation_player = $AnimationPlayer
 @onready var sprite = $Sprite2D
+@onready var state_label = $StateLabel
 
 var modifiers = {}
 var started_walking = false
@@ -24,6 +25,8 @@ func _physics_process(delta: float) -> void:
 	
 	move_and_slide()
 	update_sprite_facing_direction()
+	
+	state_label.text = $StateMachine.state.name
 
 func update_sprite_facing_direction() -> void:
 	sprite.scale.x = facing_direction
