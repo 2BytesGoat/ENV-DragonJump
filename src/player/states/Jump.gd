@@ -24,7 +24,7 @@ func handle_input(event: InputEvent) -> void:
 func physics_update(delta: float) -> void:
 	if owner.is_on_wall():
 		was_on_wall = true
-	if was_on_wall and not owner.is_on_wall():
+	if was_on_wall and not owner.is_on_wall() and time == 1:
 		jump_timer.stop()
 		state_machine.transition_to("Run")
 	time = min(time + delta, 1)
