@@ -11,11 +11,6 @@ func enter(_msg := {}) -> void:
 	owner.x_strength = x_curve.sample(time)
 	owner.play_animation(self.name)
 
-func handle_input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_accept"):
-		coyotee_timer.stop()
-		state_machine.transition_to("Jump")
-
 func physics_update(delta: float) -> void:
 	time = min(time + delta, 1)
 	owner.x_strength = x_curve.sample(time)
@@ -24,6 +19,10 @@ func physics_update(delta: float) -> void:
 	if owner.is_on_wall():
 		time = 0.0
 		owner.facing_direction *= -1
+	
+	if owner.get_jump_action():
+		coyotee_timer.stop()
+		state_machine.transition_to("Jump")
 
 func _on_coyotee_timer_timeout() -> void:
 	state_machine.transition_to("Fall")

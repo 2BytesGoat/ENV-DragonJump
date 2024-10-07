@@ -14,11 +14,6 @@ func enter(_msg := {}) -> void:
 	# TODO: find a better way to add modifiers
 	owner.modifiers["walled"] = {"velocity": Vector2(-0.01, 1)}
 	owner.play_animation(self.name)
-	
-
-func handle_input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_accept"):
-		state_machine.transition_to("Jump")
 
 func physics_update(delta: float) -> void:
 	time = min(time + delta, 1)
@@ -29,6 +24,8 @@ func physics_update(delta: float) -> void:
 		state_machine.transition_to("Idle")
 	elif not owner.is_on_wall():
 		state_machine.transition_to("Fall")
+	elif owner.get_jump_action():
+		state_machine.transition_to("Jump")
 
 func exit() -> void:
 	owner.x_strength = 0
