@@ -11,6 +11,10 @@ func _physics_process(_delta):
 		_player.game_over()
 
 func get_obs():
+	""" What needs to go in obs
+	gaol_distance, goal_vector, player_velocity, player_state, raycasts 
+	"""
+	
 	var goal_distance = 0.0
 	var goal_position = Vector3.ZERO
 	if _player.next == 0:
@@ -23,17 +27,16 @@ func get_obs():
 
 
 	var goal_vector = _player.to_local(goal_position).normalized()
-
-	goal_distance = clamp(goal_distance, 0.0, 20.0)
+	goal_distance = clamp(goal_distance, 0.0, 20.0) / 20.0
+	
 	var obs = []
 	obs.append_array(
 		[
-			_player.move_vec.x / _player.MOVE_SPEED,
-			_player.move_vec.y / _player.MAX_FALL_SPEED,
-			_player.move_vec.z / _player.MOVE_SPEED
+			_player.velocity.x / _player.MAX_SPEED.x,
+			_player.velocity.y / _player.MAX_SPEED.y,
 		]
 	)
-	obs.append_array([goal_distance / 20.0, goal_vector.x, goal_vector.y, goal_vector.z])
+	obs.append_array([goal_distance, goal_vector.x, goal_vector.y])
 	obs.append(_player.grounded)
 	obs.append_array(_player.raycast_sensor.get_observation())
 
