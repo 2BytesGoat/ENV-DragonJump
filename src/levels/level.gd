@@ -115,6 +115,8 @@ func load_scenes():
 			
 			if symbol == "P":
 				obj.player_restart.connect(reset_map)
+			if symbol == "Q":
+				GameState.goal_global_position = obj_position
 
 func clear_map():
 	for child in objects_layer.get_children():

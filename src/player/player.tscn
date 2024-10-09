@@ -1,10 +1,11 @@
-[gd_scene load_steps=23 format=3 uid="uid://dtemov8oddfs"]
+[gd_scene load_steps=24 format=3 uid="uid://dtemov8oddfs"]
 
 [ext_resource type="Script" path="res://src/player/Player.gd" id="1_88xxv"]
 [ext_resource type="Texture2D" uid="uid://dy1j3jfhnyx04" path="res://assets/player.png" id="1_t63ym"]
 [ext_resource type="Script" path="res://src/utils/StateMachine.gd" id="2_l5bkl"]
 [ext_resource type="Script" path="res://src/player/states/Idle.gd" id="3_7vw8c"]
 [ext_resource type="Script" path="res://src/player/states/Run.gd" id="3_eyxhj"]
+[ext_resource type="PackedScene" uid="uid://drvfihk5esgmv" path="res://addons/godot_rl_agents/sensors/sensors_2d/RaycastSensor2D.tscn" id="3_nasvr"]
 [ext_resource type="Script" path="res://src/player/states/Jump.gd" id="6_06vee"]
 [ext_resource type="Script" path="res://src/player/states/Fall.gd" id="7_lbbdt"]
 [ext_resource type="Script" path="res://src/player/Walled.gd" id="8_si0im"]
@@ -15,6 +16,24 @@ size = Vector2(16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_00el7"]
 size = Vector2(16, 16)
+
+[sub_resource type="Curve" id="Curve_2tw8m"]
+_data = [Vector2(0, 0.666841), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_8pxgt"]
+_data = [Vector2(0, 0.504584), 0.0, 0.0, 0, 0, Vector2(0.197987, 0.996275), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_rp7d2"]
+min_value = -1.5
+max_value = 0.0
+_data = [Vector2(0, -1.25), 0.0, 0.0, 0, 0, Vector2(0.674923, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_6p0vx"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.747867, 0.495467), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="Animation" id="Animation_ses4e"]
 resource_name = "Fall"
@@ -125,25 +144,8 @@ _data = {
 "Walled": SubResource("Animation_wfdvp")
 }
 
-[sub_resource type="Curve" id="Curve_2tw8m"]
-_data = [Vector2(0, 0.666841), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="Curve" id="Curve_8pxgt"]
-_data = [Vector2(1e-05, 1), 0.0, 0.0, 0, 0]
-point_count = 1
-
-[sub_resource type="Curve" id="Curve_rp7d2"]
-min_value = -1.5
-max_value = 0.0
-_data = [Vector2(0, -1.25), 0.0, 0.0, 0, 0, Vector2(0.674923, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="Curve" id="Curve_6p0vx"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.747867, 0.495467), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 3
-
 [node name="Player" type="CharacterBody2D"]
+collision_mask = 2
 script = ExtResource("1_88xxv")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -157,15 +159,25 @@ frame = 10
 shape = SubResource("RectangleShape2D_7b4j3")
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_00el7")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_mvj3a")
-}
-speed_scale = 1.6
+[node name="AIController2D" type="Node2D" parent="."]
+script = ExtResource("9_7xpes")
+
+[node name="RaycastSensor2D" parent="." instance=ExtResource("3_nasvr")]
+rotation = 0.10472
+collision_mask = 2
+collide_with_areas = true
+n_rays = 32.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("2_l5bkl")
@@ -198,14 +210,11 @@ one_shot = true
 script = ExtResource("8_si0im")
 y_curve = SubResource("Curve_6p0vx")
 
-[node name="AIController2D" type="Node2D" parent="."]
-script = ExtResource("9_7xpes")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2, 2)
-position_smoothing_enabled = true
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_mvj3a")
+}
+speed_scale = 1.6
 
 [node name="StateLabel" type="Label" parent="."]
 anchors_preset = 7
