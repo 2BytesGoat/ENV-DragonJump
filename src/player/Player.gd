@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name Player
 
-var MAX_SPEED = Vector2(180, 200)
+var MAX_SPEED = Vector2(190, 200)
 var ACCELERATION = 5200
 
 @onready var animation_player = $AnimationPlayer
@@ -18,15 +18,21 @@ var y_strength = 0
 var jump_action = false
 var player_jump_action = false
 
+signal player_restart
+
 
 func _ready() -> void:
 	ai_controller.init(self)
 
 func _input(event: InputEvent) -> void:
+	if not started_walking:
+		return
 	if event.is_action_pressed("ui_accept"):
 		player_jump_action = true
 	elif event.is_action_released("ui_accept"):
 		player_jump_action = false
+	if event.is_action_pressed("ui_cancel"):
+		player_restart.emit()
 
 func _physics_process(delta: float) -> void:
 	var target_speed = Vector2(x_strength * facing_direction, y_strength) * MAX_SPEED
@@ -60,4 +66,4 @@ func play_animation(animation_name: String) -> void:
 	animation_player.play(animation_name)
 
 func game_over() -> void:
-	pass
+	player_restart.emit()

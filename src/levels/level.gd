@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var bg_layer = $BackgroundLayer
 @onready var scene_layer = $ScenesLayer
+@onready var objects_layer = $Objects
 
 const symbol_to_cell_info = {
 	"W": {
@@ -34,8 +35,7 @@ var tilemap_scene_locations = {}
 func _ready():
 	#print(get_map_code())
 	map_code = get_map_code()
-	set_map_code()
-	load_scenes()
+	reset_map()
 
 func get_map_code():
 	var map_sub_codes = []
@@ -110,5 +110,23 @@ func load_scenes():
 			var obj_scene = symbol_to_scene[symbol]
 			var obj_position = scene_layer.to_global(scene_layer.map_to_local(location))
 			var obj = obj_scene.instantiate()
-			add_child(obj)
+			objects_layer.add_child(obj)
 			obj.global_position = obj_position
+			
+			if symbol == "P":
+				obj.player_restart.connect(reset_map)
+
+func clear_map():
+	for child in objects_layer.get_children():
+		objects_layer.remove_child(child)
+		child.queue_free()
+	for cell in bg_layer.get_used_cells():
+		bg_layer.erase_cell(cell)
+	for cell in scene_layer.get_used_cells():
+		scene_layer.erase_cell(cell)
+	tilemap_scene_locations = {}
+
+func reset_map():
+	clear_map()
+	set_map_code()
+	load_scenes()

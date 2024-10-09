@@ -99,3 +99,5 @@ tile_set = SubResource("TileSet_rdu8m")
 [node name="ScenesLayer" type="TileMapLayer" parent="Level"]
 tile_map_data = PackedByteArray("AAADAAQAAAAAAAAAAAACAP3/AAABAAEAAAA=")
 tile_set = SubResource("TileSet_n881i")
+
+[node name="Objects" type="Node2D" parent="Level"]

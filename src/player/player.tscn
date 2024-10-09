@@ -130,8 +130,8 @@ _data = [Vector2(0, 0.666841), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_8pxgt"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0990712, 1), 0.0, 0.0, 0, 0]
-point_count = 2
+_data = [Vector2(1e-05, 1), 0.0, 0.0, 0, 0]
+point_count = 1
 
 [sub_resource type="Curve" id="Curve_rp7d2"]
 min_value = -1.5
@@ -191,7 +191,7 @@ script = ExtResource("6_06vee")
 y_curve = SubResource("Curve_rp7d2")
 
 [node name="JumpTimer" type="Timer" parent="StateMachine/Jump"]
-wait_time = 0.39
+wait_time = 0.42
 one_shot = true
 
 [node name="Walled" type="Node" parent="StateMachine"]
