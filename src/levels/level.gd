@@ -34,7 +34,7 @@ var tilemap_scene_locations = {}
 
 func _ready():
 	#print(get_map_code())
-	map_code = get_map_code()
+	#map_code = get_map_code()
 	reset_map()
 
 func get_map_code():

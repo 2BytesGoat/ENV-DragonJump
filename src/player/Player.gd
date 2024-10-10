@@ -103,6 +103,6 @@ func game_over() -> void:
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.owner.is_in_group("EXIT"):
-		ai_controller.reward += 10
+		ai_controller.reward += 100
 		ai_controller.needs_reset = true
 		ai_controller.done = true
