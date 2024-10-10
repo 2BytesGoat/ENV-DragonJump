@@ -12,13 +12,14 @@ signal transitioned(state_name)
 # The current active state. At the start of the game, we get the `initial_state`.
 @onready var state: State = get_node(initial_state)
 
+var initialized = false
+
 
 func _ready() -> void:
-	await owner.ready
 	# The state machine assigns itself to the State objects' state_machine property.
 	for child in get_children():
 		child.state_machine = self
-	state.enter()
+	reset()
 
 
 # The state machine subscribes to node callbacks and delegates them to the state objects.
@@ -48,3 +49,10 @@ func transition_to(target_state_name: String, msg: Dictionary = {}) -> void:
 	state = get_node(target_state_name)
 	state.enter(msg)
 	emit_signal("transitioned", state.name)
+
+func reset() -> void:
+	if not initialized:
+		await owner.ready
+		initialized = true
+	state = get_node(initial_state)
+	state.enter()

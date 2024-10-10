@@ -12,7 +12,7 @@ func _physics_process(_delta):
 
 func get_obs():
 	""" What needs to go in obs
-	gaol_distance, goal_vector, player_velocity, raycasts, player_state
+	goal_distance, goal_vector, player_velocity, raycasts, player_state
 	"""
 	var goal_position = GameState.goal_global_position
 	var goal_vector = _player.to_local(goal_position).normalized()

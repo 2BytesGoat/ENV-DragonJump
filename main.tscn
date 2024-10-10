@@ -9,5 +9,19 @@
 
 [node name="Level" parent="Node2D" instance=ExtResource("1_reye2")]
 
+[node name="Level2" parent="Node2D" instance=ExtResource("1_reye2")]
+
+[node name="Level3" parent="Node2D" instance=ExtResource("1_reye2")]
+
+[node name="Level4" parent="Node2D" instance=ExtResource("1_reye2")]
+
+[node name="Level5" parent="Node2D" instance=ExtResource("1_reye2")]
+
+[node name="Level6" parent="Node2D" instance=ExtResource("1_reye2")]
+
+[node name="Level7" parent="Node2D" instance=ExtResource("1_reye2")]
+
+[node name="Level8" parent="Node2D" instance=ExtResource("1_reye2")]
+
 [node name="Sync" type="Node" parent="."]
 script = ExtResource("2_rx2js")

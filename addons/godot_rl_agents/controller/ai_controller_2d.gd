@@ -40,6 +40,8 @@ var needs_reset := false
 
 var _player: Node2D
 
+signal heuristic_changed(heuristic)
+
 
 func _ready():
 	add_to_group("AGENT")
@@ -47,7 +49,6 @@ func _ready():
 
 func init(player: Node2D):
 	_player = player
-
 
 #-- Methods that need implementing using the "extend script" option in Godot --#
 func get_obs() -> Dictionary:
@@ -113,6 +114,7 @@ func reset_if_done():
 func set_heuristic(h):
 	# sets the heuristic from "human" or "model" nothing to change here
 	heuristic = h
+	heuristic_changed.emit(h)
 
 
 func get_done():

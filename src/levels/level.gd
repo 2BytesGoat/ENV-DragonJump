@@ -114,7 +114,10 @@ func load_scenes():
 			obj.global_position = obj_position
 			
 			if symbol == "P":
-				obj.player_restart.connect(reset_map)
+				## should fix this in future to have them connected
+				#obj.player_restart.connect(reset_map)
+				obj.init_position = obj_position
+				pass
 			if symbol == "Q":
 				GameState.goal_global_position = obj_position
 
@@ -129,6 +132,6 @@ func clear_map():
 	tilemap_scene_locations = {}
 
 func reset_map():
-	clear_map()
+	clear_map() 
 	set_map_code()
 	load_scenes()
