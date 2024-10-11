@@ -28,12 +28,20 @@ func get_obs():
 		"obs": obs,
 	}
 
+func get_info():
+	var frame = get_viewport().get_texture().get_image()
+	frame.shrink_x2()
+	
+	return {
+		"frame": frame.data
+	}
+
 func set_action(action):
-	_player.jump_action = action["jump"][0] > 0
+	_player.jump_action = action["jump"] > 0
 
 func get_action_space():
 	return {
-		"jump": {"size": 1, "action_type": "continuous"},
+		"jump": {"size": 2, "action_type": "discrete"},
 	}
 
 func get_reward():

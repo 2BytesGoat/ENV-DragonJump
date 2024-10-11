@@ -1,27 +1,39 @@
-[gd_scene load_steps=3 format=3 uid="uid://cucogapbdh307"]
+[gd_scene load_steps=5 format=3 uid="uid://cucogapbdh307"]
 
 [ext_resource type="PackedScene" uid="uid://dt61v7as55h43" path="res://src/scenes/level.tscn" id="1_reye2"]
 [ext_resource type="Script" path="res://addons/godot_rl_agents/sync.gd" id="2_rx2js"]
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_lgc0y"]
+viewport_path = NodePath("Node2D/SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_vd7ee"]
+viewport_path = NodePath("Node2D/SubViewport2")
+
 [node name="BatchEnvs" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 640.0
+offset_bottom = 480.0
+texture = SubResource("ViewportTexture_lgc0y")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("ViewportTexture_vd7ee")
 
 [node name="Node2D" type="Node2D" parent="."]
 
-[node name="Level" parent="Node2D" instance=ExtResource("1_reye2")]
+[node name="SubViewport" type="SubViewport" parent="Node2D"]
+transparent_bg = true
+size = Vector2i(640, 480)
 
-[node name="Level2" parent="Node2D" instance=ExtResource("1_reye2")]
+[node name="Level" parent="Node2D/SubViewport" instance=ExtResource("1_reye2")]
 
-[node name="Level3" parent="Node2D" instance=ExtResource("1_reye2")]
+[node name="SubViewport2" type="SubViewport" parent="Node2D"]
+transparent_bg = true
+size = Vector2i(640, 480)
 
-[node name="Level4" parent="Node2D" instance=ExtResource("1_reye2")]
-
-[node name="Level5" parent="Node2D" instance=ExtResource("1_reye2")]
-
-[node name="Level6" parent="Node2D" instance=ExtResource("1_reye2")]
-
-[node name="Level7" parent="Node2D" instance=ExtResource("1_reye2")]
-
-[node name="Level8" parent="Node2D" instance=ExtResource("1_reye2")]
+[node name="Level" parent="Node2D/SubViewport2" instance=ExtResource("1_reye2")]
 
 [node name="Sync" type="Node" parent="."]
 script = ExtResource("2_rx2js")

@@ -31,6 +31,8 @@ var map_code = "W40/W1E38W1/W1E38W1/W1E38W1/W1E38W1/W1E38W1/W1E38W1/W1E1Q1E36W1/
 var offset = Vector2i(0, -10)
 var tilemap_scene_locations = {}
 
+func _input(event: InputEvent) -> void:
+	pass
 
 func _ready():
 	#print(get_map_code())
