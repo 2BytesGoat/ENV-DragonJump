@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://cucogapbdh307"]
 
 [ext_resource type="Script" path="res://addons/godot_rl_agents/sync.gd" id="2_rx2js"]
-[ext_resource type="PackedScene" uid="uid://drj0n43fyy2up" path="res://src/utils/level_render.tscn" id="2_s4smw"]
+[ext_resource type="PackedScene" uid="uid://drj0n43fyy2up" path="res://src/levels/level_render.tscn" id="2_s4smw"]
 [ext_resource type="Script" path="res://src/utils/FPSCounter.gd" id="3_ygnf3"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_7scbg"]

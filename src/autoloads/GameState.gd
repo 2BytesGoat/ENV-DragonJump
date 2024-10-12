@@ -1,5 +1,8 @@
 extends Node
 
+var frame_w = 640 / 2
+var frame_h = 480 / 2
+
 var goal_global_position = Vector2.ZERO
 var player_info = {}
 

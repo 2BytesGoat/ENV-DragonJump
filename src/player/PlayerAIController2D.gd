@@ -27,11 +27,22 @@ func get_obs():
 	}
 	
 	var frame = get_viewport().get_texture().get_image()
-	var resize_w = frame.data["width"] / 4
-	var resize_h = frame.data["height"] / 4
+	var resize_w = GameState.frame_w
+	var resize_h = GameState.frame_h
 	frame.resize(resize_w, resize_h, Image.INTERPOLATE_NEAREST)
 	
-	return {"frame": frame.data, "obs": obs}
+	var frame_data = frame.data
+	var encoded_frame = frame_data["data"].hex_encode()
+	
+	return {"obs_2d": encoded_frame, "obs": obs}
+
+func get_obs_space():
+	# may need overriding if the obs space is complex
+	var obs = get_obs()
+	return {
+		"obs": {"size": [len(obs["obs"])], "space": "box"},
+		"obs_2d": {"size": [GameState.frame_h, GameState.frame_w, 3], "space": "box"}
+	}
 
 func get_info():
 	return {}
