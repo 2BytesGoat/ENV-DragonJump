@@ -191,11 +191,10 @@ func _training_process():
 		get_tree().set_pause(true)
 		
 		var obs = _get_obs_from_agents(agents_training)
-		var info = _get_info_from_agents(agents_training)
 
 		if just_reset:
 			just_reset = false
-			var reply = {"type": "reset", "obs": obs, "reward": 0.0, "done": false, "info": info}
+			var reply = {"type": "reset", "obs": obs, "reward": 0.0, "done": false, "info": {}}
 			_send_dict_as_json_message(reply)
 			# this should go straight to getting the action and setting it checked the agent, no need to perform one phyics tick
 			get_tree().set_pause(false)
@@ -205,7 +204,7 @@ func _training_process():
 			need_to_send_obs = false
 			var reward = _get_reward_from_agents()
 			var done = _get_done_from_agents()
-			var reply = {"type": "step", "obs": obs, "reward": reward, "done": done, "info": info}
+			var reply = {"type": "step", "obs": obs, "reward": reward, "done": done, "info": {}}
 			_send_dict_as_json_message(reply)
 
 		var handled = handle_message()
@@ -517,12 +516,6 @@ func _get_obs_from_agents(agents: Array = all_agents):
 	for agent in agents:
 		obs.append(agent.get_obs())
 	return obs
-
-func _get_info_from_agents(agents: Array = all_agents):
-	var info = []
-	for agent in agents:
-		info.append(agent.get_info())
-	return info
 
 func _get_reward_from_agents(agents: Array = agents_training):
 	var rewards = []

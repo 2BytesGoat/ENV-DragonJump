@@ -11,6 +11,8 @@ var ACCELERATION = 5200
 @onready var ai_controller = $AIController2D
 @onready var raycast_sensor = $RaycastSensor2D
 
+var remote_path = null
+
 var modifiers = {}
 var started_walking = false
 

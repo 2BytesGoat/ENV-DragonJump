@@ -19,22 +19,22 @@ func get_obs():
 	var goal_distance = _player.get_goal_distance()
 	var velocity_vector = _player.velocity / _player.MAX_SPEED
 	
-	var obs = []
-	obs.append_array([goal_vector.x, goal_vector.y, goal_distance])
-	obs.append_array([velocity_vector.x, velocity_vector.y])
-	obs.append_array(_player.raycast_sensor.get_observation())
-	
-	return {
-		"obs": obs,
+	var obs = {
+		"goal_distnace": goal_distance,
+		"goal_vector": [goal_vector.x, goal_vector.y],
+		"player_velocity": [velocity_vector.x, velocity_vector.y],
+		"sensors": _player.raycast_sensor.get_observation()
 	}
+	
+	var frame = get_viewport().get_texture().get_image()
+	var resize_w = frame.data["width"] / 4
+	var resize_h = frame.data["height"] / 4
+	frame.resize(resize_w, resize_h, Image.INTERPOLATE_NEAREST)
+	
+	return {"frame": frame.data, "obs": obs}
 
 func get_info():
-	var frame = get_viewport().get_texture().get_image()
-	frame.shrink_x2()
-	
-	return {
-		"frame": frame.data
-	}
+	return {}
 
 func set_action(action):
 	_player.jump_action = action["jump"] > 0

@@ -13,6 +13,9 @@ extends Camera2D
 var _zoom_level := 1.0 : set = _set_zoom_level
 
 
+func _process(delta: float) -> void:
+	global_position = global_position.move_toward(GameState.closest_player_position, delta * 80)
+
 func _set_zoom_level(value: float) -> void:
 	var tween = create_tween()
 	# We limit the value between `min_zoom` and `max_zoom`

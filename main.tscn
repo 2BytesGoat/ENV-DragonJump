@@ -1,39 +1,51 @@
-[gd_scene load_steps=5 format=3 uid="uid://cucogapbdh307"]
+[gd_scene load_steps=6 format=3 uid="uid://cucogapbdh307"]
 
-[ext_resource type="PackedScene" uid="uid://dt61v7as55h43" path="res://src/scenes/level.tscn" id="1_reye2"]
 [ext_resource type="Script" path="res://addons/godot_rl_agents/sync.gd" id="2_rx2js"]
+[ext_resource type="PackedScene" uid="uid://drj0n43fyy2up" path="res://src/utils/level_render.tscn" id="2_s4smw"]
+[ext_resource type="Script" path="res://FPS.gd" id="4_l11tg"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_lgc0y"]
-viewport_path = NodePath("Node2D/SubViewport")
+[sub_resource type="ViewportTexture" id="ViewportTexture_7scbg"]
+viewport_path = NodePath("SubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_vd7ee"]
-viewport_path = NodePath("Node2D/SubViewport2")
+[sub_resource type="ViewportTexture" id="ViewportTexture_gfrh2"]
+viewport_path = NodePath("SubViewport")
 
-[node name="BatchEnvs" type="Node2D"]
+[node name="BatchEnvs" type="Node"]
 
-[node name="TextureRect" type="TextureRect" parent="."]
-offset_right = 640.0
-offset_bottom = 480.0
-texture = SubResource("ViewportTexture_lgc0y")
+[node name="LevelHolder" type="GridContainer" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -268.0
+offset_right = 268.0
+offset_bottom = 200.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 2
 
-[node name="TextureRect2" type="TextureRect" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
-texture = SubResource("ViewportTexture_vd7ee")
+[node name="LevelRender" parent="LevelHolder" instance=ExtResource("2_s4smw")]
+layout_mode = 2
+texture = SubResource("ViewportTexture_7scbg")
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="LevelRender2" parent="LevelHolder" instance=ExtResource("2_s4smw")]
+layout_mode = 2
+texture = SubResource("ViewportTexture_gfrh2")
 
-[node name="SubViewport" type="SubViewport" parent="Node2D"]
-transparent_bg = true
-size = Vector2i(640, 480)
+[node name="LevelRender3" parent="LevelHolder" instance=ExtResource("2_s4smw")]
+layout_mode = 2
+texture = SubResource("ViewportTexture_gfrh2")
 
-[node name="Level" parent="Node2D/SubViewport" instance=ExtResource("1_reye2")]
-
-[node name="SubViewport2" type="SubViewport" parent="Node2D"]
-transparent_bg = true
-size = Vector2i(640, 480)
-
-[node name="Level" parent="Node2D/SubViewport2" instance=ExtResource("1_reye2")]
+[node name="LevelRender4" parent="LevelHolder" instance=ExtResource("2_s4smw")]
+layout_mode = 2
+texture = SubResource("ViewportTexture_gfrh2")
 
 [node name="Sync" type="Node" parent="."]
 script = ExtResource("2_rx2js")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+size_flags_horizontal = 4
+text = "FPS: "
+script = ExtResource("4_l11tg")

@@ -1,8 +1,10 @@
 extends Node2D
 
-@onready var bg_layer = $BackgroundLayer
-@onready var scene_layer = $ScenesLayer
-@onready var objects_layer = $Objects
+@export var bg_layer: TileMapLayer
+@export var scene_layer: TileMapLayer
+@export var objects_layer: Node2D
+@export var camera: Camera2D
+
 
 const symbol_to_cell_info = {
 	"W": {
@@ -31,8 +33,6 @@ var map_code = "W40/W1E38W1/W1E38W1/W1E38W1/W1E38W1/W1E38W1/W1E38W1/W1E1Q1E36W1/
 var offset = Vector2i(0, -10)
 var tilemap_scene_locations = {}
 
-func _input(event: InputEvent) -> void:
-	pass
 
 func _ready():
 	#print(get_map_code())
@@ -137,3 +137,6 @@ func reset_map():
 	clear_map() 
 	set_map_code()
 	load_scenes()
+
+func update_camera_position(new_global_position):
+	camera.global_position = new_global_position
