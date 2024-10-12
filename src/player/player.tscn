@@ -169,7 +169,7 @@ shape = SubResource("RectangleShape2D_00el7")
 script = ExtResource("9_7xpes")
 
 [node name="RaycastSensor2D" parent="." instance=ExtResource("3_nasvr")]
-rotation = 0.10472
+rotation = 1.46608
 collision_mask = 2
 collide_with_areas = true
 n_rays = 32.0
