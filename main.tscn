@@ -1,13 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://cucogapbdh307"]
+[gd_scene load_steps=8 format=3 uid="uid://cucogapbdh307"]
 
 [ext_resource type="Script" path="res://addons/godot_rl_agents/sync.gd" id="2_rx2js"]
 [ext_resource type="PackedScene" uid="uid://drj0n43fyy2up" path="res://src/utils/level_render.tscn" id="2_s4smw"]
-[ext_resource type="Script" path="res://FPS.gd" id="4_l11tg"]
+[ext_resource type="Script" path="res://src/utils/FPSCounter.gd" id="3_ygnf3"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_7scbg"]
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_gfrh2"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_nlvbp"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_k1f1h"]
 viewport_path = NodePath("SubViewport")
 
 [node name="BatchEnvs" type="Node"]
@@ -34,11 +40,11 @@ texture = SubResource("ViewportTexture_gfrh2")
 
 [node name="LevelRender3" parent="LevelHolder" instance=ExtResource("2_s4smw")]
 layout_mode = 2
-texture = SubResource("ViewportTexture_gfrh2")
+texture = SubResource("ViewportTexture_nlvbp")
 
 [node name="LevelRender4" parent="LevelHolder" instance=ExtResource("2_s4smw")]
 layout_mode = 2
-texture = SubResource("ViewportTexture_gfrh2")
+texture = SubResource("ViewportTexture_k1f1h")
 
 [node name="Sync" type="Node" parent="."]
 script = ExtResource("2_rx2js")
@@ -48,4 +54,4 @@ offset_right = 40.0
 offset_bottom = 23.0
 size_flags_horizontal = 4
 text = "FPS: "
-script = ExtResource("4_l11tg")
+script = ExtResource("3_ygnf3")
