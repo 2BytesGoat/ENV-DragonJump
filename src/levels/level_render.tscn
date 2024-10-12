@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://drj0n43fyy2up"]
+
+[ext_resource type="PackedScene" uid="uid://dt61v7as55h43" path="res://src/levels/level.tscn" id="1_6nc43"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_q3l7r"]
+viewport_path = NodePath("SubViewport")
+
+[node name="LevelRender" type="TextureRect"]
+custom_minimum_size = Vector2(200, 200)
+offset_right = 133.333
+offset_bottom = 100.0
+texture = SubResource("ViewportTexture_q3l7r")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2i(640, 480)
+
+[node name="Level" parent="SubViewport" instance=ExtResource("1_6nc43")]

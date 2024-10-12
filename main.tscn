@@ -1,27 +1,57 @@
-[gd_scene load_steps=3 format=3 uid="uid://cucogapbdh307"]
+[gd_scene load_steps=8 format=3 uid="uid://cucogapbdh307"]
 
-[ext_resource type="PackedScene" uid="uid://dt61v7as55h43" path="res://src/scenes/level.tscn" id="1_reye2"]
 [ext_resource type="Script" path="res://addons/godot_rl_agents/sync.gd" id="2_rx2js"]
+[ext_resource type="PackedScene" uid="uid://drj0n43fyy2up" path="res://src/levels/level_render.tscn" id="2_s4smw"]
+[ext_resource type="Script" path="res://src/utils/FPSCounter.gd" id="3_ygnf3"]
 
-[node name="BatchEnvs" type="Node2D"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_7scbg"]
+viewport_path = NodePath("SubViewport")
 
-[node name="Node2D" type="Node2D" parent="."]
+[sub_resource type="ViewportTexture" id="ViewportTexture_gfrh2"]
+viewport_path = NodePath("SubViewport")
 
-[node name="Level" parent="Node2D" instance=ExtResource("1_reye2")]
+[sub_resource type="ViewportTexture" id="ViewportTexture_nlvbp"]
+viewport_path = NodePath("SubViewport")
 
-[node name="Level2" parent="Node2D" instance=ExtResource("1_reye2")]
+[sub_resource type="ViewportTexture" id="ViewportTexture_k1f1h"]
+viewport_path = NodePath("SubViewport")
 
-[node name="Level3" parent="Node2D" instance=ExtResource("1_reye2")]
+[node name="BatchEnvs" type="Node"]
 
-[node name="Level4" parent="Node2D" instance=ExtResource("1_reye2")]
+[node name="LevelHolder" type="GridContainer" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -268.0
+offset_right = 268.0
+offset_bottom = 200.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 2
 
-[node name="Level5" parent="Node2D" instance=ExtResource("1_reye2")]
+[node name="LevelRender" parent="LevelHolder" instance=ExtResource("2_s4smw")]
+layout_mode = 2
+texture = SubResource("ViewportTexture_7scbg")
 
-[node name="Level6" parent="Node2D" instance=ExtResource("1_reye2")]
+[node name="LevelRender2" parent="LevelHolder" instance=ExtResource("2_s4smw")]
+layout_mode = 2
+texture = SubResource("ViewportTexture_gfrh2")
 
-[node name="Level7" parent="Node2D" instance=ExtResource("1_reye2")]
+[node name="LevelRender3" parent="LevelHolder" instance=ExtResource("2_s4smw")]
+layout_mode = 2
+texture = SubResource("ViewportTexture_nlvbp")
 
-[node name="Level8" parent="Node2D" instance=ExtResource("1_reye2")]
+[node name="LevelRender4" parent="LevelHolder" instance=ExtResource("2_s4smw")]
+layout_mode = 2
+texture = SubResource("ViewportTexture_k1f1h")
 
 [node name="Sync" type="Node" parent="."]
 script = ExtResource("2_rx2js")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+size_flags_horizontal = 4
+text = "FPS: "
+script = ExtResource("3_ygnf3")
