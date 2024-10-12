@@ -6,8 +6,8 @@ on:
 
 env:
   GODOT_VERSION: 4.2.1
-  EXPORT_NAME: test-project
-  PROJECT_PATH: test-project
+  EXPORT_NAME: ENV-DragonJump
+  PROJECT_PATH: ENV-DragonJump
 
 jobs:
   export-windows:
