@@ -1,8 +1,10 @@
 extends Node2D
 
-@onready var bg_layer = $BackgroundLayer
-@onready var scene_layer = $ScenesLayer
-@onready var objects_layer = $Objects
+@export var bg_layer: TileMapLayer
+@export var scene_layer: TileMapLayer
+@export var objects_layer: Node2D
+@export var camera: Camera2D
+
 
 const symbol_to_cell_info = {
 	"W": {
@@ -138,3 +140,6 @@ func reset_map():
 	clear_map() 
 	set_map_code()
 	load_scenes()
+
+func update_camera_position(new_global_position):
+	camera.global_position = new_global_position
