@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://drj0n43fyy2up"]
+
+[ext_resource type="PackedScene" uid="uid://dbjsqllhx82po" path="res://src/levels/level.tscn" id="1_6nc43"]
+[ext_resource type="Script" path="res://src/levels/ViewportInterface.gd" id="1_pt4ky"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_v5thb"]
+viewport_path = NodePath("SubViewport")
+
+[node name="LevelRender" type="TextureRect"]
+texture_filter = 1
+offset_right = 480.0
+offset_bottom = 480.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource("ViewportTexture_v5thb")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ViewportInterface" type="Node2D" parent="."]
+script = ExtResource("1_pt4ky")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+canvas_item_default_texture_filter = 0
+size = Vector2i(640, 480)
+
+[node name="Level" parent="SubViewport" instance=ExtResource("1_6nc43")]
