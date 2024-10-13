@@ -148,11 +148,18 @@ jobs:
           name: mac
           path: ./build/mac
 
+      - name: Zip builds
+        run: |
+          zip -r windows.zip ./build/windows
+          zip -r linux.zip ./build/linux
+          zip -r mac.zip ./build/mac
+
       - name: List downloaded files
         run: |
           ls -la ./build/windows
           ls -la ./build/linux
           ls -la ./build/mac
+          ls -la ./
 
       - name: Create GitHub Release
         id: create_release
@@ -169,22 +176,22 @@ jobs:
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./build/windows
-          asset_name: windows
-          asset_content_type: application/octet-stream
+          asset_path: ./windows.zip
+          asset_name: windows.zip
+          asset_content_type: application/zip 
 
       - name: Upload linux release asset
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./build/linux
-          asset_name: linux
-          asset_content_type: application/octet-stream
+          asset_path: ./linux.zip
+          asset_name: linux.zip
+          asset_content_type: application/zip 
 
       - name: Upload mac release asset
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./build/mac
-          asset_name: mac
-          asset_content_type: application/octet-stream
+          asset_path: ./mac.zip
+          asset_name: mac.zip
+          asset_content_type: application/zip 
