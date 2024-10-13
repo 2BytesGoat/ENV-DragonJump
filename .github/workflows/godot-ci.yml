@@ -82,8 +82,8 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: macOS
-          path: build/macOS
+          name: mac
+          path: build/mac
 
   # export-web:
   #   name: Web Export
@@ -139,11 +139,11 @@ jobs:
           name: linux
           path: ./build/linux
       
-      - name: Download macOS artifact from previous workflow
+      - name: Download mac artifact from previous workflow
         uses: actions/download-artifact@v3
         with:
-          name: macOS
-          path: ./build/macOS
+          name: mac
+          path: ./build/mac
 
       - name: Create GitHub Release
         id: create_release
