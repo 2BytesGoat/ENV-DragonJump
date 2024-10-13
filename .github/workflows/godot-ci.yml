@@ -118,7 +118,8 @@ jobs:
   #         branch: gh-pages # The branch the action should deploy to.
   #         folder: build/web # The folder the action should deploy.
 
-  Release:
+  release:
+    name: Release
     needs: [export-windows, export-linux, export-mac]
     runs-on: ubuntu-latest
 
