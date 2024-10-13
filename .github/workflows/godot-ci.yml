@@ -82,8 +82,8 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: mac
-          path: build/mac
+          name: macOS
+          path: build/macOS
 
   # export-web:
   #   name: Web Export
@@ -118,7 +118,7 @@ jobs:
   #         branch: gh-pages # The branch the action should deploy to.
   #         folder: build/web # The folder the action should deploy.
 
-  release:
+  Release:
     needs: [export-windows, export-linux, export-mac]
     runs-on: ubuntu-latest
 
@@ -138,11 +138,11 @@ jobs:
           name: linux
           path: ./build/linux
       
-      - name: Download macos artifact from previous workflow
+      - name: Download macOS artifact from previous workflow
         uses: actions/download-artifact@v3
         with:
-          name: macos
-          path: ./build/macos
+          name: macOS
+          path: ./build/macOS
 
       - name: Create GitHub Release
         id: create_release
