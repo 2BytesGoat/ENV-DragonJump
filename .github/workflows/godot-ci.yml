@@ -148,6 +148,12 @@ jobs:
           name: mac
           path: ./build/mac
 
+      - name: List downloaded files
+        run: |
+          ls -la ./build/windows
+          ls -la ./build/linux
+          ls -la ./build/mac
+
       - name: Create GitHub Release
         id: create_release
         uses: actions/create-release@v1
