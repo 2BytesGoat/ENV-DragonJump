@@ -45,7 +45,7 @@ func get_obs_space():
 	}
 
 func get_info():
-	return {}
+	return {"is_success": is_success}
 
 func set_action(action):
 	_player.jump_action = action["jump"] > 0
