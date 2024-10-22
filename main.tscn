@@ -1,25 +1,42 @@
-[gd_scene load_steps=4 format=3 uid="uid://cucogapbdh307"]
+[gd_scene load_steps=5 format=3 uid="uid://cucogapbdh307"]
 
 [ext_resource type="Script" path="res://addons/godot_rl_agents/sync.gd" id="2_rx2js"]
 [ext_resource type="PackedScene" uid="uid://drj0n43fyy2up" path="res://src/levels/level_render.tscn" id="2_s4smw"]
+[ext_resource type="Script" path="res://src/utils/FPSCounter.gd" id="3_si20e"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_4igty"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_3iqbp"]
 viewport_path = NodePath("SubViewport")
 
 [node name="BatchEnvs" type="Node"]
 
-[node name="LevelHolder" type="GridContainer" parent="."]
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
 
-[node name="LevelRender" parent="LevelHolder" instance=ExtResource("2_s4smw")]
-layout_mode = 2
-texture = SubResource("ViewportTexture_4igty")
+[node name="LevelRender" parent="Control" instance=ExtResource("2_s4smw")]
+layout_mode = 1
+texture = SubResource("ViewportTexture_3iqbp")
+
+[node name="LevelRender2" parent="Control" instance=ExtResource("2_s4smw")]
+layout_mode = 1
+texture = SubResource("ViewportTexture_3iqbp")
+
+[node name="LevelRender3" parent="Control" instance=ExtResource("2_s4smw")]
+layout_mode = 1
+texture = SubResource("ViewportTexture_3iqbp")
+
+[node name="LevelRender4" parent="Control" instance=ExtResource("2_s4smw")]
+layout_mode = 1
+texture = SubResource("ViewportTexture_3iqbp")
 
 [node name="Sync" type="Node" parent="."]
 script = ExtResource("2_rx2js")
+
+[node name="FPSCounter" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("3_si20e")
