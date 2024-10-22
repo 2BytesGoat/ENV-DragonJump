@@ -19,8 +19,10 @@ func get_obs():
 	var goal_distance = _player.get_goal_distance()
 	var velocity_vector = _player.velocity / _player.MAX_SPEED
 	
+	var clamped_goal_distance = clamp(goal_distance, 0.0, 20.0) / 20.0
+	
 	var obs = {
-		"goal_distnace": goal_distance,
+		"goal_distance": clamped_goal_distance,
 		"goal_vector": [goal_vector.x, goal_vector.y],
 		"player_velocity": [velocity_vector.x, velocity_vector.y],
 		"sensors": _player.raycast_sensor.get_observation()
@@ -33,6 +35,12 @@ func get_obs():
 	
 	var frame_data = frame.data
 	var encoded_frame = frame_data["data"].hex_encode()
+	
+	var player_id = _player.get_instance_id()
+	GameState.player_info[player_id] = {
+		"goal_distance": goal_distance,
+		"global_position": _player.global_position
+	}
 	
 	return {"obs_2d": encoded_frame, "obs": obs}
 

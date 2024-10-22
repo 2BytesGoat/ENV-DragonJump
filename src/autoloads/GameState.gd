@@ -1,7 +1,8 @@
 extends Node
 
-var frame_w = 640 / 2
-var frame_h = 480 / 2
+# TODO: get these from the game state
+var frame_w = 512 / 4
+var frame_h = 512 / 4
 
 var goal_global_position = Vector2.ZERO
 var player_info = {}
@@ -10,7 +11,7 @@ var closest_player_position = Vector2.ZERO
 
 
 func _process(delta: float) -> void:
-	var min_distance = 2
+	var min_distance = INF
 	var closest_player = null
 	for player_name in player_info:
 		if player_info[player_name]["goal_distance"] < min_distance:

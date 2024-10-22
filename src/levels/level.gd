@@ -3,7 +3,6 @@ extends Node2D
 @export var bg_layer: TileMapLayer
 @export var scene_layer: TileMapLayer
 @export var objects_layer: Node2D
-@export var camera: Camera2D
 
 
 const symbol_to_cell_info = {
@@ -35,6 +34,8 @@ const level_2 = "W40/W1E38W1/W1E38W1/W1E38W1/W1E38W1/W1E38W1/W1E38W1/W1E1Q1E36W1
 var map_code = level_1
 var offset = Vector2i(0, -10)
 var tilemap_scene_locations = {}
+
+signal init_player_position_updated(value)
 
 
 func _ready():
@@ -114,15 +115,16 @@ func load_scenes():
 			scene_layer.erase_cell(location)
 			var obj_scene = symbol_to_scene[symbol]
 			var obj_position = scene_layer.to_global(scene_layer.map_to_local(location))
+			
+			if symbol == "P":
+				## should fix this in future to have them connected
+				init_player_position_updated.emit(obj_position)
+				continue
+			
 			var obj = obj_scene.instantiate()
 			objects_layer.add_child(obj)
 			obj.global_position = obj_position
 			
-			if symbol == "P":
-				## should fix this in future to have them connected
-				#obj.player_restart.connect(reset_map)
-				obj.init_position = obj_position
-				pass
 			if symbol == "Q":
 				GameState.goal_global_position = obj_position
 
@@ -140,6 +142,3 @@ func reset_map():
 	clear_map() 
 	set_map_code()
 	load_scenes()
-
-func update_camera_position(new_global_position):
-	camera.global_position = new_global_position

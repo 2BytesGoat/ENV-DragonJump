@@ -1,26 +1,51 @@
-[gd_scene load_steps=4 format=3 uid="uid://drj0n43fyy2up"]
+[gd_scene load_steps=6 format=3 uid="uid://drj0n43fyy2up"]
 
 [ext_resource type="PackedScene" uid="uid://dbjsqllhx82po" path="res://src/levels/level.tscn" id="1_6nc43"]
 [ext_resource type="Script" path="res://src/levels/ViewportInterface.gd" id="1_pt4ky"]
+[ext_resource type="PackedScene" uid="uid://dtemov8oddfs" path="res://src/player/player.tscn" id="3_cxuhc"]
+[ext_resource type="Script" path="res://src/levels/multiplayer_camera_controller.gd" id="3_posqs"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_v5thb"]
 viewport_path = NodePath("SubViewport")
 
 [node name="LevelRender" type="TextureRect"]
 texture_filter = 1
-offset_right = 480.0
-offset_bottom = 480.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = SubResource("ViewportTexture_v5thb")
 expand_mode = 1
 stretch_mode = 5
 
+[node name="PlayerViewport" type="SubViewport" parent="."]
+canvas_item_default_texture_filter = 0
+render_target_update_mode = 4
+
+[node name="Level" parent="PlayerViewport" instance=ExtResource("1_6nc43")]
+
+[node name="Player" parent="PlayerViewport" node_paths=PackedStringArray("target_camera") instance=ExtResource("3_cxuhc")]
+position = Vector2(60, 0)
+target_camera = NodePath("../PlayerCamera2D")
+
+[node name="PlayerCamera2D" type="Camera2D" parent="PlayerViewport"]
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+canvas_item_default_texture_filter = 0
+
+[node name="MultiplayerCameraController" type="Node" parent="SubViewport"]
+script = ExtResource("3_posqs")
+
+[node name="MultiplayerCamera2D" type="Camera2D" parent="SubViewport"]
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+
 [node name="ViewportInterface" type="Node2D" parent="."]
 script = ExtResource("1_pt4ky")
 
-[node name="SubViewport" type="SubViewport" parent="."]
-canvas_item_default_texture_filter = 0
-size = Vector2i(640, 480)
-
-[node name="Level" parent="SubViewport" instance=ExtResource("1_6nc43")]
+[connection signal="init_player_position_updated" from="PlayerViewport/Level" to="PlayerViewport/Player" method="_on_level_init_player_position_updated"]

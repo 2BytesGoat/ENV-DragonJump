@@ -10,6 +10,9 @@ var ACCELERATION = 5200
 @onready var state_label = $StateLabel
 @onready var ai_controller = $AIController2D
 @onready var raycast_sensor = $RaycastSensor2D
+@onready var camera_transform = $CameraTransform
+
+@export var target_camera: Camera2D
 
 var remote_path = null
 
@@ -28,6 +31,7 @@ signal player_restart
 
 
 func _ready() -> void:
+	camera_transform.remote_path = target_camera.get_path()
 	ai_controller.init(self)
 	raycast_sensor.activate()
 	game_over()
@@ -72,8 +76,7 @@ func update_sprite_facing_direction() -> void:
 
 func get_goal_distance():
 	var goal_position = GameState.goal_global_position
-	var goal_distance = position.distance_to(to_local(goal_position))
-	goal_distance = clamp(goal_distance, 0.0, 20.0) / 20.0
+	var goal_distance = global_position.distance_to(goal_position)
 	return goal_distance
 
 func update_reward() -> void:
@@ -108,3 +111,6 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		ai_controller.reward += 100
 		ai_controller.needs_reset = true
 		ai_controller.done = true
+
+func _on_level_init_player_position_updated(value: Vector2) -> void:
+	init_position = value
