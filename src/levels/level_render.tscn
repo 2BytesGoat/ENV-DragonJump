@@ -35,6 +35,7 @@ target_camera = NodePath("../PlayerCamera2D")
 
 [node name="SubViewport" type="SubViewport" parent="."]
 transparent_bg = true
+snap_2d_vertices_to_pixel = true
 canvas_item_default_texture_filter = 0
 
 [node name="MultiplayerCameraController" type="Node" parent="SubViewport"]

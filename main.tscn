@@ -21,6 +21,18 @@ grow_vertical = 2
 layout_mode = 1
 texture = SubResource("ViewportTexture_3iqbp")
 
+[node name="LevelRender2" parent="Control" instance=ExtResource("2_s4smw")]
+layout_mode = 1
+texture = SubResource("ViewportTexture_3iqbp")
+
+[node name="LevelRender3" parent="Control" instance=ExtResource("2_s4smw")]
+layout_mode = 1
+texture = SubResource("ViewportTexture_3iqbp")
+
+[node name="LevelRender4" parent="Control" instance=ExtResource("2_s4smw")]
+layout_mode = 1
+texture = SubResource("ViewportTexture_3iqbp")
+
 [node name="Sync" type="Node" parent="."]
 script = ExtResource("2_rx2js")
 

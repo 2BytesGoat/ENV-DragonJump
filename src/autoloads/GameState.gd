@@ -1,8 +1,8 @@
 extends Node
 
 # TODO: get these from the game state
-var frame_w = 512 / 4
-var frame_h = 512 / 4
+var frame_w = 512 / 2
+var frame_h = 512 / 2
 
 var goal_global_position = Vector2.ZERO
 var player_info = {}

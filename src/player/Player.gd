@@ -46,6 +46,13 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		game_over()
 
+func _process(_delta: float) -> void:
+	var player_id = get_instance_id()
+	GameState.player_info[player_id] = {
+		"goal_distance": get_goal_distance(),
+		"global_position": global_position
+	}
+
 func _physics_process(delta: float) -> void:
 	var target_speed = Vector2(x_strength * facing_direction, y_strength) * MAX_SPEED
 	velocity = velocity.move_toward(target_speed, ACCELERATION * delta)
