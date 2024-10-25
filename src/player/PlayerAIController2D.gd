@@ -2,6 +2,9 @@ extends AIController2D
 
 
 func _physics_process(_delta):
+	if control_mode == ControlModes.HUMAN:
+		set_action()
+	
 	n_steps += 1
 	if n_steps >= reset_after:
 		done = true
@@ -49,8 +52,14 @@ func get_obs_space():
 func get_info():
 	return {}
 
-func set_action(action):
-	_player.jump_action = action["jump"] > 0
+func get_action():
+	return {"jump": int(_player.get_jump_action())}
+
+func set_action(action = null):
+	if action:
+		_player.jump_action = action["jump"] > 0
+	else:
+		_player.jump_action = _player.keyboard_jump_action
 
 func get_action_space():
 	return {

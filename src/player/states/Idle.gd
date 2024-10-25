@@ -8,7 +8,7 @@ func enter(_msg := {}) -> void:
 	owner.velocity.x *= 0.4
 	owner.play_animation(self.name)
 
-func update(delta: float) -> void:
+func update(_delta: float) -> void:
 	if not owner.is_on_floor():
 		state_machine.transition_to("Fall")
 	elif owner.started_walking:

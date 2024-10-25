@@ -2,7 +2,7 @@ extends Node
 
 # --fixed-fps 2000 --disable-render-loop
 
-enum ControlModes { HUMAN, TRAINING, ONNX_INFERENCE }
+enum ControlModes { HUMAN, TRAINING, ONNX_INFERENCE, RECORD_EXPERT_DEMOS }
 @export var control_mode: ControlModes = ControlModes.TRAINING
 @export_range(1, 10, 1, "or_greater") var action_repeat := 8
 @export_range(0, 10, 0.1, "or_greater") var speed_up := 1.0
@@ -322,6 +322,8 @@ func _set_agent_mode(agent: Node):
 				agent.control_mode = agent.ControlModes.TRAINING
 			ControlModes.ONNX_INFERENCE:
 				agent.control_mode = agent.ControlModes.ONNX_INFERENCE
+			ControlModes.RECORD_EXPERT_DEMOS:
+				agent.control_mode = agent.ControlModes.RECORD_EXPERT_DEMOS
 
 
 func _get_agents():

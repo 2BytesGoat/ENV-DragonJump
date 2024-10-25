@@ -32,7 +32,7 @@ const level_1 = "W75/W1E73W1/W1E73W1/W1E73W1/W1E73W1/W1E73W1/W1E73W1/W1E73W1/W1E
 const level_2 = "W40/W1E38W1/W1E38W1/W1E38W1/W1E38W1/W1E38W1/W1E38W1/W1E1Q1E36W1/W13E26W1/W1E38W1/W1E18W9E11W1/W1E38W1/W1E38W1/W1E38W1/W1E32W7/W1E32W1E6/W1E2P1E18W7E4W1E6/W1E32W1E6/W1E11W6E15W1E6/W13E4W1E15W1E6/E17W17E6"
 
 var map_code = level_1
-var offset = Vector2i(0, -10)
+var map_offset = Vector2i(0, -10)
 var tilemap_scene_locations = {}
 
 signal init_player_position_updated(value)
@@ -74,7 +74,7 @@ func get_map_code():
 
 func set_map_code():
 	var y = 0
-	var map_code_offset = offset
+	var map_code_offset = map_offset
 	for map_sub_code in map_code.split("/"):
 		var current_symbol = "E"
 		var current_symbol_cnt = 0

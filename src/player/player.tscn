@@ -166,6 +166,7 @@ shape = SubResource("RectangleShape2D_00el7")
 
 [node name="AIController2D" type="Node2D" parent="."]
 script = ExtResource("9_7xpes")
+expert_demo_save_path = "res://recordings/rec.json"
 
 [node name="RaycastSensor2D" parent="." instance=ExtResource("3_nasvr")]
 rotation = 1.46608

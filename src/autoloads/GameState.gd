@@ -10,7 +10,7 @@ var player_info = {}
 var closest_player_position = Vector2.ZERO
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var min_distance = INF
 	var closest_player = null
 	for player_name in player_info:
