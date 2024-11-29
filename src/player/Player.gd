@@ -9,7 +9,6 @@ var ACCELERATION = 5200
 @onready var state_machine = $StateMachine
 @onready var state_label = $StateLabel
 @onready var ai_controller = $AIController2D
-@onready var camera_transform = $CameraTransform
 
 @export var target_camera: Camera2D
 
@@ -30,7 +29,6 @@ signal player_restart
 
 
 func _ready() -> void:
-	camera_transform.remote_path = target_camera.get_path()
 	ai_controller.init(self)
 	game_over()
 
@@ -70,6 +68,7 @@ func get_jump_action() -> bool:
 
 func set_jump_action(value) -> void:
 	jump_action = value
+	keyboard_jump_action = value
 
 func update_sprite_facing_direction() -> void:
 	sprite.scale.x = facing_direction

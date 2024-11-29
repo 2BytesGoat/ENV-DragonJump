@@ -1,19 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://cucogapbdh307"]
+[gd_scene load_steps=5 format=3 uid="uid://cucogapbdh307"]
 
 [ext_resource type="PackedScene" uid="uid://dm15ue5vr2brg" path="res://src/levels/level_container.tscn" id="1_4336g"]
 [ext_resource type="Script" path="res://addons/godot_rl_agents/sync.gd" id="2_rx2js"]
 [ext_resource type="Script" path="res://src/utils/FPSCounter.gd" id="3_si20e"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_xbj8l"]
+viewport_path = NodePath("SubViewport")
 
 [node name="BatchEnvs" type="Node"]
 
 [node name="Environments" type="Node2D" parent="."]
 
 [node name="LevelContainer" parent="Environments" instance=ExtResource("1_4336g")]
-
-[node name="LevelContainer2" parent="Environments" instance=ExtResource("1_4336g")]
+texture = SubResource("ViewportTexture_xbj8l")
 
 [node name="Sync" type="Node" parent="."]
 script = ExtResource("2_rx2js")
+control_mode = 0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
