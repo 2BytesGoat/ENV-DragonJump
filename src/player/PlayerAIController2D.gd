@@ -5,6 +5,7 @@ extends AIController2D
 
 
 func _ready() -> void:
+	super()
 	raycast_sensor.activate()
 
 func _physics_process(_delta):
@@ -36,7 +37,7 @@ func get_obs():
 		velocity_vector.x, velocity_vector.y # player_velocity
 	]
 	# sensors
-	obs.append_array(_player.raycast_sensor.get_observation())
+	obs.append_array(raycast_sensor.get_observation())
 	
 	var obs_2d = get_image_obs()
 	

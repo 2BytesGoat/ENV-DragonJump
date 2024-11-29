@@ -32,7 +32,7 @@ func _ready():
 
 	var preview_size: Vector2
 
-	sub_viewport.world_2d = get_tree().get_root().get_world_2d()
+	sub_viewport.world_2d = owner.get_world_2d()
 	sub_viewport.size = render_image_resolution
 	camera_texture.scale = displayed_image_scale_factor
 
