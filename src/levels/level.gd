@@ -39,7 +39,7 @@ signal init_player_position_updated(value)
 
 
 func _ready():
-	print(get_map_code())
+	#print(get_map_code())
 	#map_code = get_map_code()
 	reset_map()
 

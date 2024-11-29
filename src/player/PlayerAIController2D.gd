@@ -1,5 +1,11 @@
 extends AIController2D
 
+@onready var raycast_sensor = $RaycastSensor2D
+@onready var camera_sensor = $RGBCameraSensor2D
+
+
+func _ready() -> void:
+	raycast_sensor.activate()
 
 func _physics_process(_delta):
 	if control_mode == ControlModes.HUMAN:
@@ -24,29 +30,25 @@ func get_obs():
 	
 	var clamped_goal_distance = clamp(goal_distance, 0.0, 20.0) / 20.0
 	
-	var obs = {
-		"goal_distance": clamped_goal_distance,
-		"goal_vector": [goal_vector.x, goal_vector.y],
-		"player_velocity": [velocity_vector.x, velocity_vector.y],
-		"sensors": _player.raycast_sensor.get_observation()
-	}
+	var obs = [
+		clamped_goal_distance, # goal_distance
+		goal_vector.x, goal_vector.y, # goal_vector
+		velocity_vector.x, velocity_vector.y # player_velocity
+	]
+	# sensors
+	obs.append_array(_player.raycast_sensor.get_observation())
 	
-	var frame = get_viewport().get_texture().get_image()
-	var resize_w = GameState.frame_w
-	var resize_h = GameState.frame_h
-	frame.resize(resize_w, resize_h, Image.INTERPOLATE_NEAREST)
+	var obs_2d = get_image_obs()
 	
-	var frame_data = frame.data
-	var encoded_frame = frame_data["data"].hex_encode()
-	
-	return {"obs_2d": encoded_frame, "obs": obs}
+	return {"obs": obs, "obs_2d": obs_2d}
 
 func get_obs_space():
 	# may need overriding if the obs space is complex
 	var obs = get_obs()
+	
 	return {
 		"obs": {"size": [len(obs["obs"])], "space": "box"},
-		"obs_2d": {"size": [GameState.frame_h, GameState.frame_w, 3], "space": "box"}
+		"obs_2d": {"size": camera_sensor.get_camera_shape(), "space": "box"}
 	}
 
 func get_info():
@@ -54,6 +56,9 @@ func get_info():
 
 func get_action():
 	return {"jump": int(_player.get_jump_action())}
+
+func get_image_obs() -> String:
+	return camera_sensor.get_camera_pixel_encoding()
 
 func set_action(action = null):
 	if action:

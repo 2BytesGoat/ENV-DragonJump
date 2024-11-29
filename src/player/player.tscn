@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dtemov8oddfs"]
+[gd_scene load_steps=25 format=3 uid="uid://dtemov8oddfs"]
 
 [ext_resource type="Script" path="res://src/player/Player.gd" id="1_88xxv"]
 [ext_resource type="Texture2D" uid="uid://dy1j3jfhnyx04" path="res://assets/player.png" id="1_t63ym"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://src/player/states/Idle.gd" id="3_7vw8c"]
 [ext_resource type="Script" path="res://src/player/states/Run.gd" id="3_eyxhj"]
 [ext_resource type="PackedScene" uid="uid://drvfihk5esgmv" path="res://addons/godot_rl_agents/sensors/sensors_2d/RaycastSensor2D.tscn" id="3_nasvr"]
+[ext_resource type="PackedScene" uid="uid://bav1cl8uwc45c" path="res://addons/godot_rl_agents/sensors/sensors_2d/RGBCameraSensor2D.tscn" id="5_pt7v5"]
 [ext_resource type="Script" path="res://src/player/states/Jump.gd" id="6_06vee"]
 [ext_resource type="Script" path="res://src/player/states/Fall.gd" id="7_lbbdt"]
 [ext_resource type="Script" path="res://src/player/Walled.gd" id="8_si0im"]
@@ -168,11 +169,13 @@ shape = SubResource("RectangleShape2D_00el7")
 script = ExtResource("9_7xpes")
 expert_demo_save_path = "res://recordings/rec.json"
 
-[node name="RaycastSensor2D" parent="." instance=ExtResource("3_nasvr")]
+[node name="RaycastSensor2D" parent="AIController2D" instance=ExtResource("3_nasvr")]
 rotation = 1.46608
 collision_mask = 2
 collide_with_areas = true
 n_rays = 32.0
+
+[node name="RGBCameraSensor2D" parent="AIController2D" instance=ExtResource("5_pt7v5")]
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("2_l5bkl")
