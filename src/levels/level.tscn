@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=4 uid="uid://dbjsqllhx82po"]
 
-[ext_resource type="Script" path="res://src/levels/level.gd" id="1_ojwhi"]
+[ext_resource type="Script" path="res://src/levels/Level.gd" id="1_ojwhi"]
 [ext_resource type="Texture2D" uid="uid://yt2e7s1204r3" path="res://assets/forest-tiles.png" id="2_j6unf"]
 [ext_resource type="Texture2D" uid="uid://4ci0niiut62l" path="res://assets/tileset.png" id="3_ow4yj"]
 

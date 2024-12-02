@@ -12,10 +12,8 @@ var ACCELERATION = 5200
 
 @export var target_camera: Camera2D
 
-var remote_path = null
-
 var modifiers = {}
-var started_walking = false
+var started_walking = false : set = _set_started_walking
 
 var facing_direction = 1 # 1 is RIGHT -1 is LEFT
 var x_strength = 0
@@ -105,11 +103,16 @@ func game_over() -> void:
 	ai_controller.reset()
 	player_restart.emit()
 
+func _set_started_walking(value: bool) -> void:
+	started_walking = value
+	LevelState.game_paused = not value
+
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.owner.is_in_group("EXIT"):
 		ai_controller.reward += 100
 		ai_controller.needs_reset = true
 		ai_controller.done = true
+		LevelState.game_ended = true
 
 func _on_level_init_player_position_updated(value: Vector2) -> void:
 	init_position = value

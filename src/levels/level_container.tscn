@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://dm15ue5vr2brg"]
 
 [ext_resource type="PackedScene" uid="uid://dbjsqllhx82po" path="res://src/levels/level.tscn" id="1_eynh3"]
-[ext_resource type="Script" path="res://src/levels/level_container.gd" id="1_mq54i"]
+[ext_resource type="Script" path="res://src/levels/LevelContainer.gd" id="1_mq54i"]
 [ext_resource type="PackedScene" uid="uid://dtemov8oddfs" path="res://src/player/player.tscn" id="2_o0w33"]
-[ext_resource type="Script" path="res://src/levels/multiplayer_camera.gd" id="3_5olov"]
+[ext_resource type="Script" path="res://src/levels/MultiplayerCamera.gd" id="3_5olov"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_odamg"]
 viewport_path = NodePath("SubViewport")

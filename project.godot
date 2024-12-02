@@ -18,8 +18,10 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-GameState="*res://src/autoloads/GameState.gd"
 GodotSteam="*res://addons/godotsteam/GodotSteam.gd"
+GameState="*res://src/autoloads/GameState.gd"
+LevelState="*res://src/autoloads/LevelState.gd"
+Utils="*res://src/autoloads/Utils.gd"
 
 [debug]
 

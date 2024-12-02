@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bav1cl8uwc45c" path="res://addons/godot_rl_agents/sensors/sensors_2d/RGBCameraSensor2D.tscn" id="5_pt7v5"]
 [ext_resource type="Script" path="res://src/player/states/Jump.gd" id="6_06vee"]
 [ext_resource type="Script" path="res://src/player/states/Fall.gd" id="7_lbbdt"]
-[ext_resource type="Script" path="res://src/player/Walled.gd" id="8_si0im"]
+[ext_resource type="Script" path="res://src/player/states/Walled.gd" id="8_si0im"]
 [ext_resource type="Script" path="res://src/player/PlayerAIController2D.gd" id="9_7xpes"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7b4j3"]
@@ -157,12 +157,14 @@ vframes = 2
 frame = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_7b4j3")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_00el7")
 
 [node name="AIController2D" type="Node2D" parent="."]
