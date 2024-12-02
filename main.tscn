@@ -13,10 +13,8 @@ viewport_path = NodePath("SubViewport")
 [node name="Environments" type="Node" parent="."]
 
 [node name="LevelContainer" parent="Environments" instance=ExtResource("1_4336g")]
-offset_left = 2.0
-offset_top = 8.0
-offset_right = 514.0
-offset_bottom = 520.0
+offset_right = 512.0
+offset_bottom = 512.0
 texture = SubResource("ViewportTexture_xbj8l")
 
 [node name="Sync" type="Node" parent="."]

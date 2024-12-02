@@ -102,6 +102,7 @@ func game_over() -> void:
 	
 	ai_controller.reset()
 	player_restart.emit()
+	LevelState.reset()
 
 func _set_started_walking(value: bool) -> void:
 	started_walking = value
