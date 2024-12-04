@@ -37,7 +37,7 @@ func _input(event: InputEvent) -> void:
 		keyboard_jump_action = true
 	elif event.is_action_released("ui_accept"):
 		keyboard_jump_action = false
-	if event.is_action_pressed("ui_cancel"):
+	if event.is_action_pressed("player_reset"):
 		game_over()
 
 func _process(_delta: float) -> void:
