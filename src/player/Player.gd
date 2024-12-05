@@ -113,7 +113,6 @@ func game_over() -> void:
 func _set_started_walking(value: bool) -> void:
 	started_walking = value
 	LevelState.game_started = value
-	LevelState.game_paused = not value
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.owner.is_in_group("EXIT"):
