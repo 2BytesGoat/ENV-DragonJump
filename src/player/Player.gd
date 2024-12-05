@@ -33,12 +33,14 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if not started_walking:
 		return
-	if event.is_action_pressed("ui_accept"):
-		keyboard_jump_action = true
-	elif event.is_action_released("ui_accept"):
-		keyboard_jump_action = false
-	if event.is_action_pressed("player_reset"):
-		game_over()
+	if event is InputEventKey:
+		var key_name = OS.get_keycode_string(event.keycode)
+		if event.is_pressed() and key_name == GameState.JUMP_BUTTON:
+			keyboard_jump_action = true
+		elif event.is_released() and key_name == GameState.JUMP_BUTTON:
+			keyboard_jump_action = false
+		if event.is_action_pressed("player_reset"):
+			game_over()
 
 func _process(_delta: float) -> void:
 	var player_id = get_instance_id()

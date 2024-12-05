@@ -1,5 +1,7 @@
 extends Node
 
+var JUMP_BUTTON = "Space"
+
 # TODO: get these from the game state
 var frame_w = 512 / 2
 var frame_h = 512 / 2
