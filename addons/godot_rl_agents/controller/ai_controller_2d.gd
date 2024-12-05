@@ -104,6 +104,7 @@ func get_obs_space():
 func reset():
 	n_steps = 0
 	needs_reset = false
+	done = false
 
 
 func reset_if_done():

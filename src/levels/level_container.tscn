@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://dm15ue5vr2brg"]
+
+[ext_resource type="PackedScene" uid="uid://dbjsqllhx82po" path="res://src/levels/level.tscn" id="1_eynh3"]
+[ext_resource type="Script" path="res://src/levels/LevelContainer.gd" id="1_mq54i"]
+[ext_resource type="PackedScene" uid="uid://dtemov8oddfs" path="res://src/player/player.tscn" id="2_o0w33"]
+[ext_resource type="Script" path="res://src/levels/MultiplayerCamera.gd" id="3_5olov"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_odamg"]
+viewport_path = NodePath("SubViewport")
+
+[node name="LevelContainer" type="TextureRect"]
+texture = SubResource("ViewportTexture_odamg")
+script = ExtResource("1_mq54i")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+canvas_item_default_texture_filter = 0
+size = Vector2i(800, 600)
+render_target_update_mode = 3
+
+[node name="Level" parent="SubViewport" instance=ExtResource("1_eynh3")]
+
+[node name="Player" parent="SubViewport" instance=ExtResource("2_o0w33")]
+position = Vector2(60, 0)
+
+[node name="MultiplayerCamera2D" type="Camera2D" parent="SubViewport"]
+zoom = Vector2(1.5, 1.5)
+process_callback = 0
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+script = ExtResource("3_5olov")
+
+[connection signal="init_player_position_updated" from="SubViewport/Level" to="SubViewport/Player" method="_on_level_init_player_position_updated"]

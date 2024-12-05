@@ -1,0 +1,268 @@
+[gd_scene load_steps=2 format=3 uid="uid://b14v7xgixw0rx"]
+
+[ext_resource type="Script" path="res://src/ui/PauseMenu.gd" id="1_do8h5"]
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_do8h5")
+
+[node name="Panel" type="Panel" parent="."]
+use_parent_material = true
+custom_minimum_size = Vector2(600, 400)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -200.0
+offset_right = 300.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="OptionLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Active Mode: "
+
+[node name="OptionButton" type="OptionButton" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+selected = 0
+item_count = 2
+popup/item_0/text = "Human"
+popup/item_1/text = "Training"
+popup/item_1/id = 1
+
+[node name="Panel" type="Panel" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HumanContainer" type="MarginContainer" parent="Panel/MarginContainer/VBoxContainer/Panel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="GridContainer" type="GridContainer" parent="Panel/MarginContainer/VBoxContainer/Panel/HumanContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="ResetLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Jump Button"
+
+[node name="Container2" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="JumpButtonLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer/Container2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Space"
+
+[node name="JumpButtonEdit" type="Button" parent="Panel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer/Container2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+text = "Edit"
+
+[node name="HSeparator" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer"]
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer"]
+layout_mode = 2
+
+[node name="SavePathLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer"]
+layout_mode = 2
+text = "Save Path"
+
+[node name="Container" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer"]
+layout_mode = 2
+
+[node name="OptionButton" type="LinkButton" parent="Panel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer/Container"]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "./recordings"
+
+[node name="Button" type="Button" parent="Panel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer/Container"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+text = "Browse..."
+
+[node name="RecordGameplayLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer"]
+layout_mode = 2
+text = "Record Gameplay"
+
+[node name="CheckButton" type="CheckButton" parent="Panel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer"]
+layout_mode = 2
+text = "Enable/Disable "
+alignment = 2
+
+[node name="HSeparator3" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer"]
+layout_mode = 2
+
+[node name="HSeparator4" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer"]
+layout_mode = 2
+
+[node name="ShowPlayerView" type="Label" parent="Panel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer"]
+layout_mode = 2
+text = "Show 2D Observation"
+
+[node name="CheckButton2" type="CheckButton" parent="Panel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer"]
+layout_mode = 2
+text = "Enable/Disable "
+alignment = 2
+
+[node name="SavePathDialog" type="FileDialog" parent="Panel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer"]
+unique_name_in_owner = true
+title = "Open a Directory"
+initial_position = 1
+size = Vector2i(350, 300)
+ok_button_text = "Select Current Folder"
+dialog_hide_on_ok = true
+file_mode = 2
+access = 2
+
+[node name="TrainingContainer" type="MarginContainer" parent="Panel/MarginContainer/VBoxContainer/Panel"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="GridContainer" type="GridContainer" parent="Panel/MarginContainer/VBoxContainer/Panel/TrainingContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="ConnectionStatusLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/Panel/TrainingContainer/GridContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Connection Status"
+
+[node name="Container2" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/Panel/TrainingContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="ConnectionStatus" type="Label" parent="Panel/MarginContainer/VBoxContainer/Panel/TrainingContainer/GridContainer/Container2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Not Connected"
+
+[node name="ConnectButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/Panel/TrainingContainer/GridContainer/Container2"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+text = "Connect"
+
+[node name="PortLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/Panel/TrainingContainer/GridContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Port"
+
+[node name="PortTextEdit" type="TextEdit" parent="Panel/MarginContainer/VBoxContainer/Panel/TrainingContainer/GridContainer"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "11008"
+
+[node name="HSeparator5" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer/Panel/TrainingContainer/GridContainer"]
+layout_mode = 2
+
+[node name="HSeparator6" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer/Panel/TrainingContainer/GridContainer"]
+layout_mode = 2
+
+[node name="ResetLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/Panel/TrainingContainer/GridContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Steps Before Reset"
+
+[node name="TextEdit" type="TextEdit" parent="Panel/MarginContainer/VBoxContainer/Panel/TrainingContainer/GridContainer"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "1000"
+
+[node name="AgentsLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/Panel/TrainingContainer/GridContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Number of Agents"
+
+[node name="TextEdit2" type="TextEdit" parent="Panel/MarginContainer/VBoxContainer/Panel/TrainingContainer/GridContainer"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "1"
+
+[node name="HSeparator3" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer/Panel/TrainingContainer/GridContainer"]
+layout_mode = 2
+
+[node name="HSeparator4" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer/Panel/TrainingContainer/GridContainer"]
+layout_mode = 2
+
+[node name="ShowPlayerView" type="Label" parent="Panel/MarginContainer/VBoxContainer/Panel/TrainingContainer/GridContainer"]
+layout_mode = 2
+text = "Show 2D Observation"
+
+[node name="CheckButton2" type="CheckButton" parent="Panel/MarginContainer/VBoxContainer/Panel/TrainingContainer/GridContainer"]
+layout_mode = 2
+text = "Enable/Disable "
+alignment = 2
+
+[node name="Button" type="Button" parent="Panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Apply"
+
+[connection signal="item_selected" from="Panel/MarginContainer/VBoxContainer/HBoxContainer/OptionButton" to="." method="_on_option_button_item_selected"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer/Container2/JumpButtonEdit" to="." method="_on_jump_button_edit_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer/Container/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/Panel/TrainingContainer/GridContainer/Container2/ConnectButton" to="." method="_on_jump_button_edit_pressed"]
