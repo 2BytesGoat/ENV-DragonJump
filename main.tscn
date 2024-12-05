@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cucogapbdh307"]
+[gd_scene load_steps=7 format=3 uid="uid://cucogapbdh307"]
 
 [ext_resource type="PackedScene" uid="uid://dm15ue5vr2brg" path="res://src/levels/level_container.tscn" id="1_4336g"]
 [ext_resource type="Script" path="res://addons/godot_rl_agents/sync.gd" id="2_rx2js"]
+[ext_resource type="PackedScene" uid="uid://b14v7xgixw0rx" path="res://src/ui/pause_menu.tscn" id="3_ni3va"]
 [ext_resource type="Script" path="res://src/utils/FPSCounter.gd" id="3_si20e"]
 [ext_resource type="Script" path="res://src/utils/GameTimer.gd" id="4_l8jt8"]
 
@@ -22,6 +23,9 @@ script = ExtResource("2_rx2js")
 control_mode = 0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("3_ni3va")]
+visible = false
 
 [node name="FPSCounter" type="Label" parent="CanvasLayer"]
 visible = false

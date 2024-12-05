@@ -31,13 +31,14 @@ func _ready() -> void:
 	game_over()
 
 func _input(event: InputEvent) -> void:
-	if not started_walking:
-		return
 	if event is InputEventKey:
 		var key_name = OS.get_keycode_string(event.keycode)
-		if event.is_pressed() and key_name == GameState.JUMP_BUTTON:
-			keyboard_jump_action = true
-		elif event.is_released() and key_name == GameState.JUMP_BUTTON:
+		if event.pressed and not event.echo and key_name == GameState.JUMP_BUTTON:
+			if not started_walking:
+				started_walking = true
+			else:
+				keyboard_jump_action = true
+		elif not event.pressed and key_name == GameState.JUMP_BUTTON:
 			keyboard_jump_action = false
 		if event.is_action_pressed("player_reset"):
 			game_over()
@@ -50,6 +51,9 @@ func _process(_delta: float) -> void:
 	}
 
 func _physics_process(delta: float) -> void:
+	if LevelState.game_paused:
+		return
+	
 	var target_speed = Vector2(x_strength * facing_direction, y_strength) * MAX_SPEED
 	velocity = velocity.move_toward(target_speed, ACCELERATION * delta)
 	
@@ -108,6 +112,7 @@ func game_over() -> void:
 
 func _set_started_walking(value: bool) -> void:
 	started_walking = value
+	LevelState.game_started = value
 	LevelState.game_paused = not value
 
 func _on_area_2d_area_entered(area: Area2D) -> void:

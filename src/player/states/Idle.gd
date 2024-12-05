@@ -13,10 +13,3 @@ func update(_delta: float) -> void:
 		state_machine.transition_to("Fall")
 	elif owner.started_walking:
 		state_machine.transition_to("Run")
-
-func handle_input(event: InputEvent) -> void:
-	if owner.started_walking:
-		return
-	if event.is_action_pressed("ui_accept"):
-		owner.started_walking = true
-		state_machine.transition_to("Run")

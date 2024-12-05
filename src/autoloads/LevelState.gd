@@ -2,6 +2,7 @@ extends Node
 
 var show_camera_preview = false
 
+var game_started = false
 var game_paused = false
 var game_ended = false : set = _set_game_ended
 
@@ -17,7 +18,7 @@ func _ready() -> void:
 	GodotSteam.find_or_create_leaderboard(level_name)
 
 func _process(delta: float) -> void:
-	if game_paused or game_ended:
+	if not game_started or game_paused or game_ended:
 		return
 	elapsed_time += int(delta * 1000)
 
@@ -30,6 +31,9 @@ func _set_game_ended(value: bool) -> void:
 	game_ended = value
 
 func reset() -> void:
+	elapsed_time = 0.0
+	game_started = false
+	game_paused = false
 	game_ended = false
 
 func _on_leaderboard_found(_handle, found) -> void:
