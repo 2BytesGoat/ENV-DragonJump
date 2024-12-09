@@ -23,11 +23,10 @@ var keyboard_jump_action = false
 
 var init_position = Vector2.ZERO
 
-signal player_restart
-
 
 func _ready() -> void:
 	ai_controller.init(self)
+	LevelState.reset_level.connect(reset)
 	game_over()
 
 func _input(event: InputEvent) -> void:
@@ -89,12 +88,7 @@ func update_reward() -> void:
 func play_animation(animation_name: String) -> void:
 	animation_player.play(animation_name)
 
-func game_over() -> void:
-	if ai_controller.heuristic == "human":
-		started_walking = false
-	else:
-		started_walking = true
-	
+func reset() -> void:
 	modifiers = {}
 	facing_direction = 1
 	x_strength = 0
@@ -102,13 +96,19 @@ func game_over() -> void:
 	jump_action = false
 	keyboard_jump_action = false
 	
-	state_machine.reset()
 	velocity = Vector2.ZERO
 	global_position = init_position
 	
+	state_machine.reset()
 	ai_controller.reset()
-	player_restart.emit()
-	LevelState.reset()
+	
+	if ai_controller.heuristic == "human":
+		started_walking = false
+	else:
+		started_walking = true
+
+func game_over() -> void:
+	LevelState.needs_reset = true
 
 func _set_started_walking(value: bool) -> void:
 	started_walking = value
@@ -117,9 +117,8 @@ func _set_started_walking(value: bool) -> void:
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.owner.is_in_group("EXIT"):
 		ai_controller.reward += 100
-		ai_controller.needs_reset = true
 		ai_controller.done = true
-		LevelState.game_ended = true
+		LevelState.needs_reset = true
 
 func _on_level_init_player_position_updated(value: Vector2) -> void:
 	init_position = value

@@ -9,11 +9,11 @@ func _ready() -> void:
 	raycast_sensor.activate()
 
 func _physics_process(_delta):
+	n_steps += 1
 	if control_mode == ControlModes.HUMAN:
 		set_action()
 	
-	n_steps += 1
-	if n_steps >= reset_after:
+	elif n_steps >= reset_after and control_mode:
 		done = true
 		needs_reset = true
 

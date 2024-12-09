@@ -1,6 +1,7 @@
 extends Node
 
 var show_camera_preview = false
+var needs_reset = false : set = _set_needs_reset
 
 var game_started = false
 var game_paused = false
@@ -11,6 +12,9 @@ var best_time = INF
 
 var level_name = "Level 1"
 var leaderboard_found = false
+
+signal reset_level
+
 
 func _ready() -> void:
 	Steam.leaderboard_find_result.connect(_on_leaderboard_found)
@@ -29,6 +33,11 @@ func _set_game_ended(value: bool) -> void:
 			GodotSteam.submit_leaderboard_score(best_time)
 		elapsed_time = 0.0
 	game_ended = value
+
+func _set_needs_reset(value: bool) -> void:
+	if value:
+		reset_level.emit()
+		reset()
 
 func reset() -> void:
 	elapsed_time = 0.0

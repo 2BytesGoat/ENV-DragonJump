@@ -11,19 +11,154 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_do8h5")
 
-[node name="Panel" type="Panel" parent="."]
-use_parent_material = true
-custom_minimum_size = Vector2(600, 400)
+[node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="TabBar" type="TabBar" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+current_tab = 0
+tab_count = 2
+tab_0/title = "   Info   "
+tab_1/title = "Settings"
+
+[node name="InfoPanel" type="Panel" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/InfoPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/InfoPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/InfoPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Your Time: 00:00.00"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer/InfoPanel/MarginContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/InfoPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/InfoPanel/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="LeaderboardLabel" type="Label" parent="MarginContainer/VBoxContainer/InfoPanel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Leaderboard"
+
+[node name="LeaderboardOptionButton" type="OptionButton" parent="MarginContainer/VBoxContainer/InfoPanel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+selected = 0
+item_count = 3
+popup/item_0/text = "All"
+popup/item_0/id = 2
+popup/item_1/text = "Human"
+popup/item_2/text = "Training"
+popup/item_2/id = 1
+
+[node name="Panel" type="Panel" parent="MarginContainer/VBoxContainer/InfoPanel/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/InfoPanel/MarginContainer/VBoxContainer/VBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/InfoPanel/MarginContainer/VBoxContainer/VBoxContainer/Panel/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/InfoPanel/MarginContainer/VBoxContainer/VBoxContainer/Panel/ScrollContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/InfoPanel/MarginContainer/VBoxContainer/VBoxContainer/Panel/ScrollContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/InfoPanel/MarginContainer/VBoxContainer/VBoxContainer/Panel/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Player "
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/InfoPanel/MarginContainer/VBoxContainer/VBoxContainer/Panel/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "........................................"
+
+[node name="Label3" type="Label" parent="MarginContainer/VBoxContainer/InfoPanel/MarginContainer/VBoxContainer/VBoxContainer/Panel/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "00:00.00"
+horizontal_alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/InfoPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="ResetButton" type="Button" parent="MarginContainer/VBoxContainer/InfoPanel/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 42)
+layout_mode = 2
+text = "Reset"
+
+[node name="HomeButton" type="Button" parent="MarginContainer/VBoxContainer/InfoPanel/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 42)
+layout_mode = 2
+text = "Home"
+
+[node name="NextButton" type="Button" parent="MarginContainer/VBoxContainer/InfoPanel/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 42)
+layout_mode = 2
+text = "Next"
+
+[node name="SettingsPanel" type="Panel" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+use_parent_material = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/SettingsPanel"]
 use_parent_material = true
 layout_mode = 1
 anchors_preset = 8
@@ -42,19 +177,19 @@ theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 30
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/SettingsPanel/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/SettingsPanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="OptionLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="OptionLabel" type="Label" parent="MarginContainer/VBoxContainer/SettingsPanel/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Active Mode: "
 
-[node name="OptionButton" type="OptionButton" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="OptionButton" type="OptionButton" parent="MarginContainer/VBoxContainer/SettingsPanel/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 selected = 0
@@ -63,11 +198,11 @@ popup/item_0/text = "Human"
 popup/item_1/text = "Training"
 popup/item_1/id = 1
 
-[node name="Panel" type="Panel" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="Panel" type="Panel" parent="MarginContainer/VBoxContainer/SettingsPanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="HumanContainer" type="MarginContainer" parent="Panel/MarginContainer/VBoxContainer/Panel"]
+[node name="HumanContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/SettingsPanel/MarginContainer/VBoxContainer/Panel"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -80,81 +215,82 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="GridContainer" type="GridContainer" parent="Panel/MarginContainer/VBoxContainer/Panel/HumanContainer"]
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/SettingsPanel/MarginContainer/VBoxContainer/Panel/HumanContainer"]
 layout_mode = 2
 columns = 2
 
-[node name="ResetLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer"]
+[node name="ResetLabel" type="Label" parent="MarginContainer/VBoxContainer/SettingsPanel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 text = "Jump Button"
 
-[node name="Container2" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer"]
+[node name="Container2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/SettingsPanel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 2
 
-[node name="JumpButtonLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer/Container2"]
+[node name="JumpButtonLabel" type="Label" parent="MarginContainer/VBoxContainer/SettingsPanel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer/Container2"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Space"
 
-[node name="JumpButtonEdit" type="Button" parent="Panel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer/Container2"]
+[node name="JumpButtonEdit" type="Button" parent="MarginContainer/VBoxContainer/SettingsPanel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer/Container2"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 text = "Edit"
 
-[node name="HSeparator" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer"]
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer/SettingsPanel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer"]
 layout_mode = 2
 
-[node name="HSeparator2" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer"]
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBoxContainer/SettingsPanel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer"]
 layout_mode = 2
 
-[node name="SavePathLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer"]
+[node name="SavePathLabel" type="Label" parent="MarginContainer/VBoxContainer/SettingsPanel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer"]
 layout_mode = 2
 text = "Save Path"
 
-[node name="Container" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer"]
+[node name="Container" type="HBoxContainer" parent="MarginContainer/VBoxContainer/SettingsPanel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer"]
 layout_mode = 2
 
-[node name="OptionButton" type="LinkButton" parent="Panel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer/Container"]
+[node name="RecordingsSavePath" type="LinkButton" parent="MarginContainer/VBoxContainer/SettingsPanel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer/Container"]
+unique_name_in_owner = true
 clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "./recordings"
 
-[node name="Button" type="Button" parent="Panel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer/Container"]
+[node name="RecordingsSavePathButton" type="Button" parent="MarginContainer/VBoxContainer/SettingsPanel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer/Container"]
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 text = "Browse..."
 
-[node name="RecordGameplayLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer"]
+[node name="RecordGameplayLabel" type="Label" parent="MarginContainer/VBoxContainer/SettingsPanel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer"]
 layout_mode = 2
 text = "Record Gameplay"
 
-[node name="CheckButton" type="CheckButton" parent="Panel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer"]
+[node name="CheckButton" type="CheckButton" parent="MarginContainer/VBoxContainer/SettingsPanel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer"]
 layout_mode = 2
 text = "Enable/Disable "
 alignment = 2
 
-[node name="HSeparator3" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer"]
+[node name="HSeparator3" type="HSeparator" parent="MarginContainer/VBoxContainer/SettingsPanel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer"]
 layout_mode = 2
 
-[node name="HSeparator4" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer"]
+[node name="HSeparator4" type="HSeparator" parent="MarginContainer/VBoxContainer/SettingsPanel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer"]
 layout_mode = 2
 
-[node name="ShowPlayerView" type="Label" parent="Panel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer"]
+[node name="ShowPlayerView" type="Label" parent="MarginContainer/VBoxContainer/SettingsPanel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer"]
 layout_mode = 2
 text = "Show 2D Observation"
 
-[node name="CheckButton2" type="CheckButton" parent="Panel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer"]
+[node name="CheckButton2" type="CheckButton" parent="MarginContainer/VBoxContainer/SettingsPanel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer"]
 layout_mode = 2
 text = "Enable/Disable "
 alignment = 2
 
-[node name="SavePathDialog" type="FileDialog" parent="Panel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer"]
+[node name="SavePathDialog" type="FileDialog" parent="MarginContainer/VBoxContainer/SettingsPanel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer"]
 unique_name_in_owner = true
 title = "Open a Directory"
 initial_position = 1
@@ -164,7 +300,7 @@ dialog_hide_on_ok = true
 file_mode = 2
 access = 2
 
-[node name="TrainingContainer" type="MarginContainer" parent="Panel/MarginContainer/VBoxContainer/Panel"]
+[node name="TrainingContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/SettingsPanel/MarginContainer/VBoxContainer/Panel"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
@@ -178,101 +314,97 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="GridContainer" type="GridContainer" parent="Panel/MarginContainer/VBoxContainer/Panel/TrainingContainer"]
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/SettingsPanel/MarginContainer/VBoxContainer/Panel/TrainingContainer"]
 layout_mode = 2
 columns = 2
 
-[node name="ConnectionStatusLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/Panel/TrainingContainer/GridContainer"]
+[node name="ConnectionStatusLabel" type="Label" parent="MarginContainer/VBoxContainer/SettingsPanel/MarginContainer/VBoxContainer/Panel/TrainingContainer/GridContainer"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 text = "Connection Status"
 
-[node name="Container2" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/Panel/TrainingContainer/GridContainer"]
+[node name="Container2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/SettingsPanel/MarginContainer/VBoxContainer/Panel/TrainingContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 2
 
-[node name="ConnectionStatus" type="Label" parent="Panel/MarginContainer/VBoxContainer/Panel/TrainingContainer/GridContainer/Container2"]
+[node name="ConnectionStatus" type="Label" parent="MarginContainer/VBoxContainer/SettingsPanel/MarginContainer/VBoxContainer/Panel/TrainingContainer/GridContainer/Container2"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Not Connected"
 
-[node name="ConnectButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/Panel/TrainingContainer/GridContainer/Container2"]
+[node name="ConnectButton" type="Button" parent="MarginContainer/VBoxContainer/SettingsPanel/MarginContainer/VBoxContainer/Panel/TrainingContainer/GridContainer/Container2"]
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 text = "Connect"
 
-[node name="PortLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/Panel/TrainingContainer/GridContainer"]
+[node name="PortLabel" type="Label" parent="MarginContainer/VBoxContainer/SettingsPanel/MarginContainer/VBoxContainer/Panel/TrainingContainer/GridContainer"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 text = "Port"
 
-[node name="PortTextEdit" type="TextEdit" parent="Panel/MarginContainer/VBoxContainer/Panel/TrainingContainer/GridContainer"]
+[node name="PortTextEdit" type="TextEdit" parent="MarginContainer/VBoxContainer/SettingsPanel/MarginContainer/VBoxContainer/Panel/TrainingContainer/GridContainer"]
 custom_minimum_size = Vector2(0, 35)
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "11008"
 
-[node name="HSeparator5" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer/Panel/TrainingContainer/GridContainer"]
+[node name="HSeparator5" type="HSeparator" parent="MarginContainer/VBoxContainer/SettingsPanel/MarginContainer/VBoxContainer/Panel/TrainingContainer/GridContainer"]
 layout_mode = 2
 
-[node name="HSeparator6" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer/Panel/TrainingContainer/GridContainer"]
+[node name="HSeparator6" type="HSeparator" parent="MarginContainer/VBoxContainer/SettingsPanel/MarginContainer/VBoxContainer/Panel/TrainingContainer/GridContainer"]
 layout_mode = 2
 
-[node name="ResetLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/Panel/TrainingContainer/GridContainer"]
+[node name="ResetLabel" type="Label" parent="MarginContainer/VBoxContainer/SettingsPanel/MarginContainer/VBoxContainer/Panel/TrainingContainer/GridContainer"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 text = "Steps Before Reset"
 
-[node name="TextEdit" type="TextEdit" parent="Panel/MarginContainer/VBoxContainer/Panel/TrainingContainer/GridContainer"]
+[node name="TextEdit" type="TextEdit" parent="MarginContainer/VBoxContainer/SettingsPanel/MarginContainer/VBoxContainer/Panel/TrainingContainer/GridContainer"]
 custom_minimum_size = Vector2(0, 35)
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "1000"
 
-[node name="AgentsLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/Panel/TrainingContainer/GridContainer"]
+[node name="AgentsLabel" type="Label" parent="MarginContainer/VBoxContainer/SettingsPanel/MarginContainer/VBoxContainer/Panel/TrainingContainer/GridContainer"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 text = "Number of Agents"
 
-[node name="TextEdit2" type="TextEdit" parent="Panel/MarginContainer/VBoxContainer/Panel/TrainingContainer/GridContainer"]
+[node name="TextEdit2" type="TextEdit" parent="MarginContainer/VBoxContainer/SettingsPanel/MarginContainer/VBoxContainer/Panel/TrainingContainer/GridContainer"]
 custom_minimum_size = Vector2(0, 35)
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "1"
 
-[node name="HSeparator3" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer/Panel/TrainingContainer/GridContainer"]
+[node name="HSeparator3" type="HSeparator" parent="MarginContainer/VBoxContainer/SettingsPanel/MarginContainer/VBoxContainer/Panel/TrainingContainer/GridContainer"]
 layout_mode = 2
 
-[node name="HSeparator4" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer/Panel/TrainingContainer/GridContainer"]
+[node name="HSeparator4" type="HSeparator" parent="MarginContainer/VBoxContainer/SettingsPanel/MarginContainer/VBoxContainer/Panel/TrainingContainer/GridContainer"]
 layout_mode = 2
 
-[node name="ShowPlayerView" type="Label" parent="Panel/MarginContainer/VBoxContainer/Panel/TrainingContainer/GridContainer"]
+[node name="ShowPlayerView" type="Label" parent="MarginContainer/VBoxContainer/SettingsPanel/MarginContainer/VBoxContainer/Panel/TrainingContainer/GridContainer"]
 layout_mode = 2
 text = "Show 2D Observation"
 
-[node name="CheckButton2" type="CheckButton" parent="Panel/MarginContainer/VBoxContainer/Panel/TrainingContainer/GridContainer"]
+[node name="CheckButton2" type="CheckButton" parent="MarginContainer/VBoxContainer/SettingsPanel/MarginContainer/VBoxContainer/Panel/TrainingContainer/GridContainer"]
 layout_mode = 2
 text = "Enable/Disable "
 alignment = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/SettingsPanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="Button" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 2
-text = "Home"
-
-[node name="ApplyButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="ApplyButton" type="Button" parent="MarginContainer/VBoxContainer/SettingsPanel/MarginContainer/VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Apply"
 
-[connection signal="item_selected" from="Panel/MarginContainer/VBoxContainer/HBoxContainer/OptionButton" to="." method="_on_option_button_item_selected"]
-[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer/Container2/JumpButtonEdit" to="." method="_on_jump_button_edit_pressed"]
-[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer/Container/Button" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/Panel/TrainingContainer/GridContainer/Container2/ConnectButton" to="." method="_on_jump_button_edit_pressed"]
-[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/HBoxContainer2/ApplyButton" to="." method="_on_apply_button_pressed"]
+[connection signal="tab_clicked" from="MarginContainer/VBoxContainer/TabBar" to="." method="_on_tab_bar_tab_clicked"]
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/SettingsPanel/MarginContainer/VBoxContainer/HBoxContainer/OptionButton" to="." method="_on_option_button_item_selected"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/SettingsPanel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer/Container2/JumpButtonEdit" to="." method="_on_jump_button_edit_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/SettingsPanel/MarginContainer/VBoxContainer/Panel/HumanContainer/GridContainer/Container/RecordingsSavePathButton" to="." method="_on_recordings_save_path_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/SettingsPanel/MarginContainer/VBoxContainer/Panel/TrainingContainer/GridContainer/Container2/ConnectButton" to="." method="_on_jump_button_edit_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/SettingsPanel/MarginContainer/VBoxContainer/HBoxContainer2/ApplyButton" to="." method="_on_apply_button_pressed"]
